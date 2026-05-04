@@ -1,0 +1,61 @@
+@import "tailwindcss";
+
+@theme inline {
+  /* Vermelho primario - Governo SP */
+  --color-gov-red-900: #4A0008;
+  --color-gov-red-800: #7A0012;
+  --color-gov-red-700: #B00020;
+  --color-gov-red-500: #E52040;
+  --color-gov-red-100: #FDEAED;
+
+  /* Chumbo / Slate */
+  --color-slate-900: #1A1A1F;
+  --color-slate-800: #2E2E36;
+  --color-slate-700: #44444F;
+  --color-slate-600: #5C5C68;
+  --color-slate-500: #767682;
+  --color-slate-400: #9E9EA8;
+  --color-slate-300: #C8C8D0;
+  --color-slate-100: #EBEBEE;
+
+  /* Neutros */
+  --color-off-white: #F5F5F5;
+
+  /* Status */
+  --color-status-success: #168821;
+  --color-status-danger: #E52040;
+
+  /* Colecoes */
+  --color-academico: #4A148C;
+  --color-academico-bg: #EDE7F6;
+  --color-pedagogico: #1B5E20;
+  --color-pedagogico-bg: #E8F5E9;
+  --color-livro: #B00020;
+  --color-livro-bg: #FDEAED;
+  --color-evento: #E65100;
+  --color-evento-bg: #FBE9E7;
+
+  --font-sans: "Source Sans 3", system-ui, sans-serif;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-sans);
+  background: var(--color-off-white);
+  color: var(--color-slate-900);
+}
+
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: #EBEBEE; }
+::-webkit-scrollbar-thumb { background: #9E9EA8; border-radius: 3px; }
+
+button:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--color-gov-red-700);
+  outline-offset: 2px;
+}
