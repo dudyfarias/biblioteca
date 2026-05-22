@@ -1,6 +1,6 @@
 "use client";
 
-import { FaSearch } from "react-icons/fa";
+import { FiSearch } from "react-icons/fi";
 
 interface SearchBarProps {
   value: string;
@@ -14,39 +14,41 @@ export function SearchBar({
   value,
   onChange,
   onSearch,
-  placeholder = "Buscar artigos, documentos, autores...",
+  placeholder = "Buscar no acervo",
   size = "md",
 }: SearchBarProps) {
   const lg = size === "lg";
 
   return (
-    <div className="relative flex gap-2">
-      <div className="relative flex-1">
-        <FaSearch
-          className={`absolute top-1/2 -translate-y-1/2 text-slate-400 ${
-            lg ? "left-4 text-base" : "left-3 text-sm"
+    <div className={`flex w-full flex-col gap-3 sm:flex-row ${lg ? "max-w-[780px]" : ""}`}>
+      <label className="relative min-w-0 flex-1">
+        <span className="sr-only">Pesquisar no acervo</span>
+        <FiSearch
+          className={`pointer-events-none absolute top-1/2 -translate-y-1/2 text-sp-blue ${
+            lg ? "left-5 text-[20px]" : "left-4 text-[17px]"
           }`}
+          aria-hidden="true"
         />
         <input
-          type="text"
+          type="search"
           value={value}
           onChange={(e) => onChange(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && onSearch()}
           placeholder={placeholder}
-          className={`w-full border border-slate-300 rounded bg-white text-slate-900 font-sans outline-none focus:border-gov-red-700 ${
-            lg
-              ? "py-3.5 px-4 pl-[46px] text-base"
-              : "py-[9px] px-3 pl-[38px] text-sm"
+          className={`w-full rounded-lg border border-sp-gray-medium bg-sp-white text-sp-black outline-none transition-colors placeholder:text-sp-black/45 focus:border-sp-blue ${
+            lg ? "h-14 px-5 pl-14 text-[15px]" : "h-11 px-4 pl-11 text-[13px]"
           }`}
         />
-      </div>
+      </label>
       <button
+        type="button"
         onClick={onSearch}
-        className={`bg-gov-red-700 text-white border-none rounded font-semibold cursor-pointer font-sans flex items-center gap-[7px] shrink-0 transition-colors hover:bg-gov-red-800 ${
-          lg ? "py-3.5 px-7 text-[15px]" : "py-[9px] px-5 text-sm"
+        className={`sp-button-primary shrink-0 px-6 ${
+          lg ? "h-14 text-[14px]" : "h-11 text-[13px]"
         }`}
       >
-        <FaSearch /> Buscar
+        <FiSearch aria-hidden="true" />
+        Buscar
       </button>
     </div>
   );

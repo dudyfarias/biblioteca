@@ -3,43 +3,84 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import {
-  FaBook,
-  FaGraduationCap,
-  FaChalkboardTeacher,
-  FaCalendarAlt,
-  FaBalanceScale,
-  FaLeaf,
-  FaChevronRight,
-  FaArrowRight,
-  FaPlusCircle,
-} from "react-icons/fa";
+  FiArrowRight,
+  FiAward,
+  FiBookOpen,
+  FiCalendar,
+  FiFileText,
+  FiLayers,
+  FiPlusCircle,
+  FiShield,
+  FiTrendingUp,
+} from "react-icons/fi";
 import { GovBar } from "@/components/gov-bar";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { SearchBar } from "@/components/search-bar";
 import { Tag } from "@/components/tag";
 import { DocCard } from "@/components/doc-card";
+import { SPGeometry } from "@/components/sp-identity";
 import { SAMPLE_DOCS } from "@/lib/data";
 
-const ICON_MAP: Record<string, React.ReactNode> = {
-  "graduation-cap": <FaGraduationCap className="text-xl" />,
-  chalkboard: <FaChalkboardTeacher className="text-xl" />,
-  book: <FaBook className="text-xl" />,
-  calendar: <FaCalendarAlt className="text-xl" />,
-  scale: <FaBalanceScale className="text-xl" />,
-  leaf: <FaLeaf className="text-xl" />,
-};
-
 const CATEGORIES = [
-  { icon: "graduation-cap", label: "Trabalhos Academicos", count: 312, color: "#4A148C", bg: "#EDE7F6" },
-  { icon: "chalkboard", label: "Materiais Pedagogicos", count: 134, color: "#1B5E20", bg: "#E8F5E9" },
-  { icon: "book", label: "Livros Digitais", count: 89, color: "#B00020", bg: "#FDEAED" },
-  { icon: "calendar", label: "Eventos", count: 47, color: "#E65100", bg: "#FBE9E7" },
-  { icon: "scale", label: "Aspectos Juridicos", count: 248, color: "#B00020", bg: "#FDEAED" },
-  { icon: "leaf", label: "Sustentabilidade e ODS", count: 76, color: "#1B5E20", bg: "#E8F5E9" },
+  {
+    icon: <FiLayers />,
+    label: "Trabalhos Acadêmicos",
+    count: 312,
+    color: "text-sp-blue",
+    bg: "bg-sp-blue/10",
+  },
+  {
+    icon: <FiFileText />,
+    label: "Materiais Pedagógicos",
+    count: 134,
+    color: "text-sp-green",
+    bg: "bg-sp-green/10",
+  },
+  {
+    icon: <FiBookOpen />,
+    label: "Livros Digitais",
+    count: 89,
+    color: "text-sp-red",
+    bg: "bg-gov-red-100",
+  },
+  {
+    icon: <FiCalendar />,
+    label: "Eventos",
+    count: 47,
+    color: "text-sp-blue-petrol",
+    bg: "bg-sp-olive/10",
+  },
+  {
+    icon: <FiShield />,
+    label: "Aspectos Jurídicos",
+    count: 248,
+    color: "text-sp-blue-dark",
+    bg: "bg-sp-blue-light/20",
+  },
+  {
+    icon: <FiTrendingUp />,
+    label: "Sustentabilidade e ODS",
+    count: 76,
+    color: "text-sp-green",
+    bg: "bg-sp-green/10",
+  },
 ];
 
-const QUICK_TAGS = ["Pregao eletronico", "ODS", "Contratos", "PCA", "TCE-SP", "ENAP"];
+const QUICK_TAGS = ["Pregão eletrônico", "ODS", "Contratos", "PCA", "TCE-SP", "ENAP"];
+
+const STATS = [
+  ["783", "Documentos catalogados"],
+  ["4", "Coleções curatoriais"],
+  ["12", "Áreas temáticas"],
+  ["2001-2025", "Cobertura temporal"],
+];
+
+const TRENDING_DOCS = SAMPLE_DOCS.filter(
+  (doc) =>
+    doc.type === "artigo" &&
+    (doc.assunto === "Sustentabilidade e ODS" || doc.tags.includes("Sustentabilidade")),
+).slice(0, 3);
 
 export default function HomePage() {
   const [query, setQuery] = useState("");
@@ -51,135 +92,157 @@ export default function HomePage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-off-white">
+    <div className="min-h-screen bg-sp-white text-sp-black">
       <GovBar />
       <Header />
 
-      {/* Hero */}
-      <div className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-700 py-14 px-6 relative overflow-hidden">
-        <div className="absolute top-0 left-0 right-0 h-1 bg-gov-red-700" />
-        <div className="max-w-[800px] mx-auto text-center">
-          <div className="inline-flex items-center gap-2 bg-gov-red-700/20 border border-gov-red-700/40 rounded-full px-3.5 py-1 mb-6">
-            <FaBook className="text-gov-red-500 text-[11px]" />
-            <span className="text-[11px] text-[#F8899A] font-semibold tracking-wider">
-              BIBLIOTECA DIGITAL DE LOGISTICA PUBLICA
-            </span>
+      <main>
+        <section className="relative overflow-hidden border-b border-sp-gray-medium/60 bg-sp-gray-light">
+          <div className="absolute inset-0 sp-pattern opacity-70" aria-hidden="true" />
+          <div className="sp-container relative py-10 lg:py-14">
+            <div className="min-w-0">
+              <div className="mb-6 inline-flex items-center gap-2 rounded-md border border-sp-blue/20 bg-sp-white px-3 py-2 text-[12px] text-sp-blue sp-subtitle">
+                <FiAward aria-hidden="true" />
+                Plataforma oficial de conhecimento e inovação pública
+              </div>
+              <h1 className="sp-title max-w-[700px] text-[34px] leading-[1.08] text-sp-black md:text-[48px] xl:text-[54px]">
+                Biblioteca Digital de Logística Pública
+              </h1>
+              <p className="mt-6 max-w-[690px] text-[16px] leading-relaxed text-sp-black/72">
+                Acervo institucional de trabalhos acadêmicos, materiais pedagógicos,
+                livros digitais e documentos técnicos para apoiar contratações públicas,
+                governança e gestão de suprimentos no Estado de São Paulo.
+              </p>
+
+              <div className="mt-8">
+                <SearchBar value={query} onChange={setQuery} onSearch={() => handleSearch()} size="lg" />
+              </div>
+
+              <div className="mt-5 flex flex-wrap gap-2">
+                {QUICK_TAGS.map((tag) => (
+                  <Tag key={tag} onClick={() => handleSearch(tag)}>
+                    {tag}
+                  </Tag>
+                ))}
+              </div>
+
+              <div className="mt-7 flex items-center">
+                <SPGeometry interactive className="h-24 w-40 opacity-95" />
+              </div>
+            </div>
           </div>
-          <h1 className="text-4xl font-bold text-white leading-tight mb-4 tracking-tight">
-            Conhecimento para a<br />
-            <span className="text-gov-red-500">Gestao Publica</span>
-          </h1>
-          <p className="text-base text-white/70 leading-relaxed max-w-[560px] mx-auto mb-8">
-            Acervo de trabalhos academicos, materiais pedagogicos, livros e
-            documentos sobre logistica publica — organizado conforme a Lei n
-            14.133/2021.
-          </p>
-          <SearchBar
-            value={query}
-            onChange={setQuery}
-            onSearch={() => handleSearch()}
-            size="lg"
-          />
-          <div className="mt-4 flex gap-2 justify-center flex-wrap">
-            {QUICK_TAGS.map((t) => (
-              <Tag key={t} onClick={() => handleSearch(t)}>
-                {t}
-              </Tag>
+        </section>
+
+        <section className="border-b border-sp-gray-medium/60 bg-sp-white py-8">
+          <div className="sp-container grid gap-3 md:grid-cols-4">
+            {STATS.map(([value, label]) => (
+              <div key={label} className="border-l-4 border-sp-red bg-sp-gray-light p-5">
+                <div className="sp-title text-[26px] text-sp-black">{value}</div>
+                <div className="mt-1 text-[12px] text-sp-black/62">{label}</div>
+              </div>
             ))}
           </div>
-        </div>
-      </div>
+        </section>
 
-      {/* Stats bar */}
-      <div className="bg-gov-red-700 py-3.5 px-6 flex justify-center gap-12">
-        {[
-          ["783", "Documentos"],
-          ["4", "Colecoes"],
-          ["12", "Areas Tematicas"],
-          ["2001–2025", "Anos cobertos"],
-        ].map(([n, l]) => (
-          <div key={l} className="text-center">
-            <div className="text-xl font-bold text-white">{n}</div>
-            <div className="text-[11px] text-white/75">{l}</div>
-          </div>
-        ))}
-      </div>
+        <section className="sp-section bg-sp-white">
+          <div className="sp-container">
+            <SectionHeading
+              eyebrow="Explorar o acervo"
+              title="Coleções organizadas para tomada de decisão pública"
+              action="Consultar acervo"
+              onAction={() => router.push("/acervo")}
+            />
 
-      {/* Colecoes */}
-      <div className="bg-off-white py-10 px-6">
-        <div className="max-w-[1200px] mx-auto">
-          <h2 className="text-[22px] font-bold text-slate-800 mb-6">
-            Explorar o Acervo
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {CATEGORIES.map((cat) => (
-              <button
-                key={cat.label}
-                onClick={() => handleSearch(cat.label)}
-                className="bg-white border border-slate-100 rounded p-5 cursor-pointer flex items-center gap-4 shadow-sm transition-all hover:shadow-md hover:-translate-y-0.5 hover:border-gov-red-700 text-left w-full"
-              >
-                <div
-                  className="w-11 h-11 rounded flex items-center justify-center shrink-0"
-                  style={{ background: cat.bg }}
+            <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+              {CATEGORIES.map((category) => (
+                <button
+                  key={category.label}
+                  type="button"
+                  onClick={() => handleSearch(category.label)}
+                  className="sp-card flex min-h-[132px] w-full items-start gap-4 p-5 text-left"
                 >
-                  <span style={{ color: cat.color }}>
-                    {ICON_MAP[cat.icon]}
+                  <span className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-md ${category.bg} ${category.color}`}>
+                    {category.icon}
                   </span>
-                </div>
-                <div>
-                  <div className="text-sm font-semibold text-slate-800">
-                    {cat.label}
-                  </div>
-                  <div className="text-xs text-slate-500 mt-0.5">
-                    {cat.count} documentos
-                  </div>
-                </div>
-                <FaChevronRight className="text-slate-300 text-xs ml-auto" />
-              </button>
-            ))}
+                  <span className="min-w-0">
+                    <span className="sp-subtitle block text-[15px] text-sp-black">{category.label}</span>
+                    <span className="mt-2 block text-[12px] text-sp-black/62">
+                      {category.count} documentos disponíveis
+                    </span>
+                  </span>
+                  <FiArrowRight className="ml-auto mt-1 text-sp-red" aria-hidden="true" />
+                </button>
+              ))}
+            </div>
           </div>
-        </div>
-      </div>
+        </section>
 
-      {/* Publicacoes em destaque */}
-      <div className="bg-white py-10 px-6">
-        <div className="max-w-[1200px] mx-auto">
-          <div className="flex justify-between items-center mb-6">
-            <h2 className="text-[22px] font-bold text-slate-800">
-              Documentos em Destaque
-            </h2>
-            <button
-              onClick={() => router.push("/acervo")}
-              className="text-[13px] text-gov-red-700 font-semibold cursor-pointer bg-transparent border-none flex items-center gap-1"
-            >
-              Ver acervo completo <FaArrowRight />
+        <section className="sp-section bg-sp-gray-light">
+          <div className="sp-container">
+            <SectionHeading
+              eyebrow="Temas em alta"
+              title="Sustentabilidade e ODS"
+              action="Ver tema no acervo"
+              onAction={() => handleSearch("Sustentabilidade e ODS")}
+            />
+            <p className="mt-3 max-w-[760px] text-[13px] leading-relaxed text-sp-black/66">
+              Artigos indicados para apoiar compras públicas sustentáveis,
+              desenvolvimento responsável e inovação aplicada à cadeia de suprimentos.
+            </p>
+
+            <div className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
+              {TRENDING_DOCS.map((doc) => (
+                <DocCard key={doc.id} doc={doc} />
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="bg-sp-blue-petrol py-10 text-sp-white">
+          <div className="sp-container flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+            <div>
+              <div className="sp-title text-[26px]">Contribua com o acervo</div>
+              <p className="mt-2 max-w-[680px] text-[13px] leading-relaxed text-sp-white/72">
+                Pesquisadores e gestores públicos podem submeter artigos e documentos
+                para fortalecer a memória técnica da logística pública.
+              </p>
+            </div>
+            <button type="button" className="sp-button-primary h-12 shrink-0 px-6 text-[14px]">
+              <FiPlusCircle aria-hidden="true" />
+              Submeter documento
             </button>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {SAMPLE_DOCS.slice(0, 3).map((doc) => (
-              <DocCard key={doc.id} doc={doc} />
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* CTA banner */}
-      <div className="bg-slate-800 py-8 px-6 flex flex-col md:flex-row items-center justify-center gap-8">
-        <div>
-          <div className="text-lg font-bold text-white mb-1">
-            Contribua com o acervo
-          </div>
-          <div className="text-[13px] text-white/65">
-            Pesquisadores e gestores publicos podem submeter artigos e documentos.
-          </div>
-        </div>
-        <button className="bg-gov-red-700 text-white border-none rounded px-7 py-3 text-sm font-semibold cursor-pointer font-sans shrink-0 transition-colors hover:bg-gov-red-800 flex items-center gap-2">
-          <FaPlusCircle />
-          Submeter documento
-        </button>
-      </div>
+        </section>
+      </main>
 
       <Footer />
+    </div>
+  );
+}
+
+function SectionHeading({
+  eyebrow,
+  title,
+  action,
+  onAction,
+}: {
+  eyebrow: string;
+  title: string;
+  action: string;
+  onAction: () => void;
+}) {
+  return (
+    <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+      <div>
+        <div className="sp-subtitle text-[12px] uppercase text-sp-red">{eyebrow}</div>
+        <h2 className="sp-title mt-2 max-w-[760px] text-[30px] leading-tight text-sp-black md:text-[38px]">
+          {title}
+        </h2>
+      </div>
+      <button type="button" onClick={onAction} className="sp-button-secondary h-11 px-5 text-[13px]">
+        {action}
+        <FiArrowRight aria-hidden="true" />
+      </button>
     </div>
   );
 }

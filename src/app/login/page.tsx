@@ -2,8 +2,9 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { FaBook, FaInfoCircle } from "react-icons/fa";
+import { FiInfo, FiLock, FiMail } from "react-icons/fi";
 import { GovBar } from "@/components/gov-bar";
+import { GovernmentLogo, LibraryMark, SPGeometry } from "@/components/sp-identity";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -15,71 +16,103 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-off-white font-sans">
+    <div className="min-h-screen bg-sp-gray-light text-sp-black">
       <GovBar />
-      <div className="flex-1 flex items-center justify-center p-6">
-        <div className="w-full max-w-[440px]">
-          {/* Logo */}
-          <div className="text-center mb-8">
-            <div className="w-14 h-14 bg-slate-800 rounded-lg flex items-center justify-center mx-auto mb-3">
-              <FaBook className="text-gov-red-700 text-2xl" />
+      <main className="sp-container grid min-h-[calc(100vh-40px)] gap-8 py-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+        <section className="relative hidden min-h-[560px] overflow-hidden rounded-lg border border-sp-gray-medium bg-sp-white p-8 lg:block">
+          <SPGeometry className="absolute right-8 top-8 h-52 w-56" />
+          <div className="relative z-10">
+            <GovernmentLogo />
+            <div className="mt-16 max-w-[460px]">
+              <div className="sp-subtitle text-[12px] uppercase text-sp-red">Acesso institucional</div>
+              <h1 className="sp-title mt-3 text-[44px] leading-tight text-sp-black">
+                Biblioteca Digital de Logística Pública
+              </h1>
+              <p className="mt-5 text-[14px] leading-relaxed text-sp-black/66">
+                Ambiente de gestão para servidores autorizados. Documentos públicos
+                permanecem disponíveis para consulta sem autenticação.
+              </p>
             </div>
-            <div className="text-xl font-bold text-slate-800">BIBLIOTECA</div>
-            <div className="text-xs text-slate-500">Digital de Logistica Publica</div>
+          </div>
+        </section>
+
+        <section className="mx-auto w-full max-w-[460px]">
+          <div className="mb-8 flex justify-center">
+            <LibraryMark />
           </div>
 
-          <div className="bg-white border border-slate-100 rounded p-7 shadow-md">
-            <h2 className="text-lg font-bold text-slate-800 mb-1.5">Acesso a conta</h2>
-            <p className="text-[13px] text-slate-500 mb-6">
-              Utilize seu e-mail institucional do Governo do Estado de SP.
-            </p>
-
-            <div className="mb-4">
-              <label className="text-xs font-semibold text-slate-700 block mb-1.5">
-                E-mail institucional <span className="text-gov-red-700">*</span>
-              </label>
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="seu.nome@sp.gov.br"
-                className="w-full py-[9px] px-3 border border-slate-300 rounded text-sm font-sans text-slate-800 outline-none focus:border-gov-red-700"
-              />
-            </div>
+          <div className="sp-panel p-7 md:p-8">
             <div className="mb-6">
-              <label className="text-xs font-semibold text-slate-700 block mb-1.5">
-                Senha <span className="text-gov-red-700">*</span>
-              </label>
-              <input
-                type="password"
-                value={pass}
-                onChange={(e) => setPass(e.target.value)}
-                placeholder="••••••••"
-                className="w-full py-[9px] px-3 border border-slate-300 rounded text-sm font-sans outline-none focus:border-gov-red-700"
-              />
+              <h2 className="sp-title text-[28px] text-sp-black">Entrar</h2>
+              <p className="mt-2 text-[13px] leading-relaxed text-sp-black/62">
+                Utilize seu e-mail institucional do Governo do Estado de São Paulo.
+              </p>
             </div>
+
+            <div className="space-y-4">
+              <label className="block">
+                <span className="sp-subtitle mb-2 block text-[12px] text-sp-black">
+                  E-mail institucional <span className="text-sp-red">*</span>
+                </span>
+                <span className="relative block">
+                  <FiMail
+                    className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-sp-blue"
+                    aria-hidden="true"
+                  />
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="seu.nome@sp.gov.br"
+                    className="h-12 w-full rounded-lg border border-sp-gray-medium bg-sp-white px-4 pl-11 text-[13px] text-sp-black outline-none transition-colors placeholder:text-sp-black/42 focus:border-sp-blue"
+                  />
+                </span>
+              </label>
+
+              <label className="block">
+                <span className="sp-subtitle mb-2 block text-[12px] text-sp-black">
+                  Senha <span className="text-sp-red">*</span>
+                </span>
+                <span className="relative block">
+                  <FiLock
+                    className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-sp-blue"
+                    aria-hidden="true"
+                  />
+                  <input
+                    type="password"
+                    value={pass}
+                    onChange={(e) => setPass(e.target.value)}
+                    placeholder="••••••••"
+                    className="h-12 w-full rounded-lg border border-sp-gray-medium bg-sp-white px-4 pl-11 text-[13px] text-sp-black outline-none transition-colors placeholder:text-sp-black/42 focus:border-sp-blue"
+                  />
+                </span>
+              </label>
+            </div>
+
             <button
+              type="button"
               onClick={handleLogin}
-              className="w-full bg-gov-red-700 text-white border-none rounded py-[11px] text-[15px] font-semibold cursor-pointer font-sans mb-3 transition-colors hover:bg-gov-red-800"
+              className="sp-button-primary mt-6 h-12 w-full px-4 text-[14px]"
             >
               Entrar
             </button>
-            <div className="text-center text-xs text-slate-500">
-              <a href="#" className="text-gov-red-700 no-underline hover:underline">
+
+            <div className="mt-4 text-center text-[12px]">
+              <a href="#" className="text-sp-blue no-underline hover:underline">
                 Esqueci minha senha
               </a>
             </div>
           </div>
 
-          <div className="mt-4 flex items-start gap-2.5 bg-slate-100 border-l-[3px] border-slate-600 rounded-r px-4 py-2.5 text-[13px] text-slate-800">
-            <FaInfoCircle className="text-slate-600 mt-0.5 shrink-0" />
+          <div className="mt-4 flex items-start gap-3 rounded-lg border border-sp-blue/20 bg-sp-blue/10 p-4 text-[12px] leading-relaxed text-sp-blue-petrol">
+            <FiInfo className="mt-0.5 shrink-0 text-sp-blue" aria-hidden="true" />
             <span>
-              Acesso restrito a servidores do Governo do Estado de Sao Paulo. Documentos
-              publicos estao disponiveis sem login.
+              Acesso restrito a servidores do Governo do Estado de São Paulo.
+              Documentos públicos estão disponíveis sem login.
             </span>
           </div>
-        </div>
-      </div>
+        </section>
+      </main>
     </div>
   );
 }

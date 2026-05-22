@@ -1,6 +1,6 @@
 "use client";
 
-import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 
 interface PaginationProps {
   current: number;
@@ -13,45 +13,53 @@ export function Pagination({ current, total, onChange }: PaginationProps) {
   for (let i = 1; i <= Math.min(total, 5); i++) pages.push(i);
 
   const btn = (active: boolean, disabled: boolean) =>
-    `w-9 h-9 flex items-center justify-center border rounded text-[13px] font-semibold cursor-pointer transition-all font-sans ${
+    `flex h-10 min-w-10 items-center justify-center rounded-md border px-3 text-[13px] sp-subtitle transition-colors ${
       active
-        ? "border-gov-red-700 bg-gov-red-700 text-white"
-        : "border-slate-300 bg-white text-slate-600"
-    } ${disabled ? "opacity-40 cursor-default" : "hover:border-gov-red-700"}`;
+        ? "border-sp-blue bg-sp-blue text-sp-white"
+        : "border-sp-gray-medium bg-sp-white text-sp-black/72"
+    } ${disabled ? "cursor-default opacity-45" : active ? "" : "hover:border-sp-blue hover:text-sp-blue"}`;
 
   return (
-    <div className="flex gap-1 items-center justify-center">
+    <nav className="flex items-center justify-center gap-1" aria-label="Paginação">
       <button
+        type="button"
         className={btn(false, current === 1)}
         onClick={() => current > 1 && onChange(current - 1)}
         disabled={current === 1}
+        aria-label="Página anterior"
       >
-        <FaChevronLeft className="text-[11px]" />
+        <FiChevronLeft aria-hidden="true" />
       </button>
       {pages.map((p) => (
         <button
           key={p}
+          type="button"
           className={btn(p === current, false)}
           onClick={() => onChange(p)}
+          aria-current={p === current ? "page" : undefined}
         >
           {p}
         </button>
       ))}
       {total > 5 && (
         <>
-          <span className={btn(false, false)}>...</span>
-          <button className={btn(false, false)} onClick={() => onChange(total)}>
+          <span className="flex h-10 min-w-10 items-center justify-center px-2 text-sp-black/50">
+            ...
+          </span>
+          <button type="button" className={btn(false, false)} onClick={() => onChange(total)}>
             {total}
           </button>
         </>
       )}
       <button
+        type="button"
         className={btn(false, current === total)}
         onClick={() => current < total && onChange(current + 1)}
         disabled={current === total}
+        aria-label="Próxima página"
       >
-        <FaChevronRight className="text-[11px]" />
+        <FiChevronRight aria-hidden="true" />
       </button>
-    </div>
+    </nav>
   );
 }

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { FaChevronRight } from "react-icons/fa";
+import { FiChevronRight } from "react-icons/fi";
 
 interface BreadcrumbItem {
   label: string;
@@ -8,19 +8,24 @@ interface BreadcrumbItem {
 
 export function Breadcrumb({ items }: { items: BreadcrumbItem[] }) {
   return (
-    <div className="bg-white px-6 py-2.5 border-b border-off-white text-xs text-slate-400 flex items-center gap-1.5 font-sans">
-      {items.map((item, i) => (
-        <span key={i} className="flex items-center gap-1.5">
-          {i > 0 && <FaChevronRight className="text-[9px]" />}
-          {item.href ? (
-            <Link href={item.href} className="text-gov-red-700 no-underline hover:underline">
-              {item.label}
-            </Link>
-          ) : (
-            <span>{item.label}</span>
-          )}
-        </span>
-      ))}
-    </div>
+    <nav
+      aria-label="Você está aqui"
+      className="border-b border-sp-gray-medium/60 bg-sp-white"
+    >
+      <div className="sp-container flex min-h-12 items-center gap-2 overflow-x-auto text-[12px] text-sp-black/62">
+        {items.map((item, i) => (
+          <span key={`${item.label}-${i}`} className="flex shrink-0 items-center gap-2">
+            {i > 0 && <FiChevronRight className="text-sp-gray-dark" aria-hidden="true" />}
+            {item.href ? (
+              <Link href={item.href} className="text-sp-blue no-underline hover:underline">
+                {item.label}
+              </Link>
+            ) : (
+              <span className="text-sp-black/70">{item.label}</span>
+            )}
+          </span>
+        ))}
+      </div>
+    </nav>
   );
 }

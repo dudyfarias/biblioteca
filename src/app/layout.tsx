@@ -1,17 +1,18 @@
 import type { Metadata } from "next";
-import { Source_Sans_3 } from "next/font/google";
+import { Montserrat } from "next/font/google";
 import "./globals.css";
 
-const sourceSans = Source_Sans_3({
+const montserrat = Montserrat({
   subsets: ["latin"],
-  variable: "--font-sans",
+  variable: "--font-montserrat",
+  weight: ["500", "600", "700"],
   display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "Biblioteca Digital de Logistica Publica",
+  title: "Biblioteca Digital de Logística Pública",
   description:
-    "Acervo de trabalhos academicos, materiais pedagogicos, livros e documentos sobre logistica publica — Governo do Estado de Sao Paulo.",
+    "Acervo de trabalhos acadêmicos, materiais pedagógicos, livros e documentos sobre logística pública — Governo do Estado de São Paulo.",
 };
 
 export default function RootLayout({
@@ -20,7 +21,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR" className={`${sourceSans.variable} h-full antialiased`}>
+    <html lang="pt-BR" className={`${montserrat.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col font-sans">{children}</body>
     </html>
   );

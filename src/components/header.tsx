@@ -2,13 +2,11 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import {
-  FaBook,
-  FaSignInAlt,
-  FaUser,
-} from "react-icons/fa";
+import { FiLogIn } from "react-icons/fi";
+import { GovernmentLogo, LibraryMark } from "@/components/sp-identity";
 
 const NAV_ITEMS = [
+  { label: "Início", href: "/" },
   { label: "Acervo", href: "/acervo" },
   { label: "Categorias", href: "/categorias" },
   { label: "Autores", href: "/autores" },
@@ -19,48 +17,47 @@ export function Header() {
   const pathname = usePathname();
 
   return (
-    <header className="bg-white border-b border-slate-100 shadow-sm px-6 flex items-center h-[72px] gap-8 font-sans">
-      <Link href="/" className="flex items-center gap-3 no-underline shrink-0">
-        <div className="w-10 h-10 bg-slate-800 rounded flex items-center justify-center">
-          <FaBook className="text-gov-red-500 text-lg" />
-        </div>
-        <div>
-          <div className="text-[17px] font-bold text-slate-800 leading-tight">
-            BIBLIOTECA
+    <header className="sticky top-0 z-40 border-b border-sp-gray-medium/60 bg-sp-white/95 backdrop-blur">
+      <div className="sp-container flex min-h-[78px] items-center gap-6 py-3">
+        <Link href="/" className="flex shrink-0 items-center gap-4 no-underline">
+          <GovernmentLogo compact />
+          <div className="hidden h-10 w-px bg-sp-gray-medium lg:block" />
+          <div className="hidden lg:block">
+            <LibraryMark compact />
           </div>
-          <div className="text-[10px] text-slate-400 leading-tight">
-            Digital de Logistica Publica
-          </div>
-        </div>
-      </Link>
+        </Link>
 
-      <nav className="flex gap-0.5 ml-auto">
-        {NAV_ITEMS.map((item) => {
-          const active = pathname === item.href || pathname.startsWith(item.href + "/");
-          return (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={`text-sm font-semibold px-3.5 py-2 whitespace-nowrap transition-all no-underline border-b-2 ${
-                active
-                  ? "text-gov-red-700 border-gov-red-700"
-                  : "text-[#333] border-transparent hover:text-gov-red-700 rounded"
-              }`}
-            >
-              {item.label}
-            </Link>
-          );
-        })}
-      </nav>
+        <nav className="ml-auto hidden items-center gap-1 md:flex" aria-label="Navegação principal">
+          {NAV_ITEMS.map((item) => {
+            const active =
+              pathname === item.href ||
+              (item.href !== "/" && pathname.startsWith(item.href + "/"));
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                aria-current={active ? "page" : undefined}
+                className={`rounded-md px-3 py-2 text-[13px] no-underline transition-colors ${
+                  active
+                    ? "bg-sp-gray-light text-sp-blue sp-subtitle"
+                    : "text-sp-black/72 hover:bg-sp-gray-light hover:text-sp-black"
+                }`}
+              >
+                {item.label}
+              </Link>
+            );
+          })}
+        </nav>
 
-      <div className="flex gap-2 items-center ml-4">
         <Link
           href="/login"
-          className="font-sans text-[13px] font-semibold px-4 py-[7px] rounded border-2 border-gov-red-700 text-gov-red-700 bg-white flex items-center gap-1.5 transition-all hover:bg-gov-red-100 no-underline"
+          className="sp-button-primary h-11 shrink-0 px-4 text-[13px] no-underline"
         >
-          <FaSignInAlt /> Entrar
+          <FiLogIn aria-hidden="true" />
+          <span>Entrar</span>
         </Link>
       </div>
+      <div className="h-1 bg-[linear-gradient(90deg,#000000_0_24%,#FFFFFF_24%_30%,#FF161F_30%_58%,#034EA2_58%_100%)]" />
     </header>
   );
 }

@@ -1,10 +1,10 @@
-const BADGE_COLORS: Record<string, { bg: string; text: string }> = {
-  artigo: { bg: "bg-gov-red-100", text: "text-gov-red-700" },
-  oficial: { bg: "bg-slate-800", text: "text-white" },
-  academico: { bg: "bg-[#EDE7F6]", text: "text-[#4A148C]" },
-  publicado: { bg: "bg-[#D4EDDA]", text: "text-[#168821]" },
-  revisao: { bg: "bg-[#FFF3CD]", text: "text-[#856404]" },
-  retirado: { bg: "bg-[#FDECEA]", text: "text-gov-red-500" },
+const BADGE_COLORS: Record<string, string> = {
+  artigo: "border-sp-blue/25 bg-sp-blue/10 text-sp-blue",
+  oficial: "border-sp-black bg-sp-black text-sp-white",
+  academico: "border-sp-blue-medium/30 bg-sp-blue-medium/10 text-sp-blue-dark",
+  publicado: "border-sp-green/30 bg-sp-green/10 text-sp-green",
+  revisao: "border-sp-olive/35 bg-sp-olive/10 text-sp-blue-petrol",
+  retirado: "border-sp-red/30 bg-gov-red-100 text-sp-red",
 };
 
 interface BadgeProps {
@@ -13,10 +13,11 @@ interface BadgeProps {
 }
 
 export function Badge({ type = "artigo", children }: BadgeProps) {
-  const colors = BADGE_COLORS[type] ?? BADGE_COLORS.artigo;
   return (
     <span
-      className={`inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-sm whitespace-nowrap ${colors.bg} ${colors.text}`}
+      className={`inline-flex min-h-7 items-center rounded-md border px-2.5 text-[11px] sp-subtitle ${
+        BADGE_COLORS[type] ?? BADGE_COLORS.artigo
+      }`}
     >
       {children}
     </span>

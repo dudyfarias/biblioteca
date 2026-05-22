@@ -1,63 +1,66 @@
-import { FaBook } from "react-icons/fa";
+import { GovernmentLogo, LibraryMark } from "@/components/sp-identity";
+
+const GOV_LINKS = ["Ouvidoria", "Transparência", "SIC", "Acesso à Informação"];
+const LIBRARY_LINKS = [
+  "Portal de Compras SP",
+  "Laboratório de Logística",
+  "Legislação NLLC",
+  "Capacitação",
+];
 
 export function Footer() {
   return (
-    <footer className="bg-[#333] text-white pt-8 pb-5 px-6 font-sans mt-auto">
-      <div className="max-w-[1200px] mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-6">
+    <footer className="mt-auto bg-sp-black text-sp-white">
+      <div className="h-1 bg-[linear-gradient(90deg,#FF161F_0_36%,#FFFFFF_36%_42%,#034EA2_42%_100%)]" />
+      <div className="sp-container py-10">
+        <div className="grid gap-10 lg:grid-cols-[1.2fr_0.8fr_0.8fr]">
           <div>
-            <div className="font-bold text-[15px] mb-3 flex items-center gap-2">
-              <FaBook className="text-gov-red-500" />
-              BIBLIOTECA
-            </div>
-            <div className="text-xs text-white/65 leading-relaxed">
-              Biblioteca Digital de Logistica Publica do Governo do Estado de Sao
-              Paulo. Secretaria de Gestao e Governo Digital — SGGD.
-            </div>
-          </div>
-          <div>
-            <div className="font-semibold text-xs uppercase tracking-wider mb-3 text-white/50">
-              Links Uteis
-            </div>
-            {[
-              "Portal de Compras SP",
-              "Laboratorio de Logistica",
-              "Legislacao NLLC",
-              "Capacitacao",
-            ].map((l) => (
-              <div
-                key={l}
-                className="text-xs text-white/75 mb-1.5 cursor-pointer hover:text-white"
-              >
-                {l}
-              </div>
-            ))}
-          </div>
-          <div>
-            <div className="font-semibold text-xs uppercase tracking-wider mb-3 text-white/50">
-              Governo SP
-            </div>
-            {["Ouvidoria", "Transparencia", "SIC", "Acesso a Informacao"].map(
-              (l) => (
-                <div
-                  key={l}
-                  className="text-xs text-white/75 mb-1.5 cursor-pointer hover:text-white"
-                >
-                  {l}
+            <div className="rounded-lg border border-sp-white/15 bg-sp-white/5 p-5">
+              <div className="flex flex-col gap-5 sm:flex-row sm:items-center">
+                <div>
+                  <GovernmentLogo tone="white" orientation="vertical" />
                 </div>
-              ),
-            )}
+                <div className="hidden h-12 w-px bg-sp-white/16 sm:block" />
+                <div className="text-sp-white [&_*]:text-sp-white">
+                  <LibraryMark />
+                </div>
+              </div>
+              <p className="mt-5 max-w-[560px] text-[13px] leading-relaxed text-sp-white/72">
+                Biblioteca Digital de Logística Pública do Governo do Estado de São Paulo.
+                Secretaria de Gestão e Governo Digital.
+              </p>
+            </div>
           </div>
+
+          <FooterColumn title="Biblioteca" items={LIBRARY_LINKS} />
+          <FooterColumn title="Governo SP" items={GOV_LINKS} />
         </div>
-        <div className="border-t border-white/10 pt-4 flex justify-between items-center">
-          <span className="text-[11px] text-white/45">
-            &copy; 2026 Governo do Estado de Sao Paulo — SGGD
-          </span>
-          <span className="text-[11px] text-white/45">
-            Desenvolvido por Prodesp
-          </span>
+
+        <div className="mt-8 flex flex-col gap-3 border-t border-sp-white/12 pt-5 text-[11px] text-sp-white/55 sm:flex-row sm:items-center sm:justify-between">
+          <span>© 2026 Governo do Estado de São Paulo - SGGD</span>
+          <span>Desenvolvido por Prodesp</span>
         </div>
       </div>
     </footer>
+  );
+}
+
+function FooterColumn({ title, items }: { title: string; items: string[] }) {
+  return (
+    <div>
+      <h2 className="sp-subtitle mb-4 text-[13px] text-sp-white">{title}</h2>
+      <ul className="space-y-2">
+        {items.map((item) => (
+          <li key={item}>
+            <a
+              href="#"
+              className="text-[12px] text-sp-white/70 no-underline transition-colors hover:text-sp-white"
+            >
+              {item}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }

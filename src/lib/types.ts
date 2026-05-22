@@ -1,34 +1,34 @@
 export type Assunto =
-  | "Aspectos Juridicos e Regulatorios"
+  | "Aspectos Jurídicos e Regulatórios"
   | "Sustentabilidade e ODS"
-  | "Governanca"
-  | "Logistica e Gestao de Suprimentos"
+  | "Governança"
+  | "Logística e Gestão de Suprimentos"
   | "TIC"
   | "Micro e Pequenas Empresas"
-  | "Conteudos Transversais"
-  | "Inovacao e Tecnologia"
-  | "Servicos"
-  | "Obras e Servicos de Engenharia"
-  | "Sancoes Administrativas"
+  | "Conteúdos Transversais"
+  | "Inovação e Tecnologia"
+  | "Serviços"
+  | "Obras e Serviços de Engenharia"
+  | "Sanções Administrativas"
   | "Integridade";
 
 export type Categoria =
-  | "Contratacao Todas as Fases"
-  | "Plano Anual de Contratacoes (PCA)"
-  | "Planejamento/Fase Preparatoria"
-  | "Selecao do Fornecedor"
-  | "Contratacao Direta"
-  | "Procedimentos Auxiliares"
-  | "Gestao de Contratos"
-  | "Conteudos Transversais";
+  | "Contratação Todas as Fases"
+  | "Plano Anual de Contratações (PCA)"
+  | "Planejamento/Fase Preparatória"
+  | "Seleção do Fornecedor"
+  | "Gestão de Contratos"
+  | "Gestão de RP"
+  | "Gestão do Credenciamento"
+  | "Conteúdos Transversais";
 
 export type Colecao =
-  | "Trabalhos Academicos"
-  | "Materiais Pedagogicos"
+  | "Trabalhos Acadêmicos"
+  | "Materiais Pedagógicos"
   | "Livros Digitais"
   | "Eventos";
 
-export type Complexidade = "Baixa" | "Media" | "Media-Alta" | "Alta";
+export type Complexidade = "Baixa" | "Média" | "Média-Alta" | "Alta";
 
 export type Tipologia =
   | "Administrativo"
@@ -47,6 +47,7 @@ export interface Documento {
   assunto: Assunto;
   categoria: Categoria;
   subcategoria?: string;
+  microcategoria?: string;
   autorPrincipal: string;
   autoridade?: string;
   title: string;

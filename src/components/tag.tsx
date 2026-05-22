@@ -7,16 +7,19 @@ interface TagProps {
 }
 
 export function Tag({ active, onClick, children }: TagProps) {
-  return (
-    <span
-      onClick={onClick}
-      className={`inline-flex items-center gap-[5px] text-xs px-3 py-1 rounded-full border cursor-pointer transition-all font-sans ${
-        active
-          ? "border-gov-red-700 bg-gov-red-100 text-gov-red-700 font-semibold"
-          : "border-slate-300 bg-white text-slate-600 hover:border-gov-red-700 hover:text-gov-red-700"
-      }`}
-    >
-      {children}
-    </span>
-  );
+  const className = `inline-flex min-h-8 items-center rounded-md border px-3 text-[12px] transition-colors ${
+    active
+      ? "border-sp-red bg-gov-red-100 text-sp-red sp-subtitle"
+      : "border-sp-gray-medium bg-sp-white text-sp-black/72 hover:border-sp-blue hover:text-sp-blue"
+  } ${onClick ? "cursor-pointer" : ""}`;
+
+  if (onClick) {
+    return (
+      <button type="button" onClick={onClick} className={className}>
+        {children}
+      </button>
+    );
+  }
+
+  return <span className={className}>{children}</span>;
 }

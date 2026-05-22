@@ -1,23 +1,39 @@
 export function GovBar() {
+  const links = ["Ouvidoria", "Transparência", "SIC", "Acesso à Informação"];
+
   return (
-    <div className="bg-[#333] h-10 flex items-center px-6 text-xs text-white gap-4 font-sans">
-      <span className="font-bold text-xs">Governo do Estado de Sao Paulo</span>
-      <div className="ml-auto flex gap-4 items-center">
-        <a href="#" className="text-white/80 text-[11px] no-underline hover:text-white">
-          Ouvidoria
-        </a>
-        <a href="#" className="text-white/80 text-[11px] no-underline hover:text-white">
-          Transparencia
-        </a>
-        <a href="#" className="text-white/80 text-[11px] no-underline hover:text-white">
-          Acesso a Informacao
-        </a>
-        <button className="bg-transparent border border-white/30 text-white text-[10px] px-1.5 py-0.5 rounded-sm cursor-pointer">
-          A-
-        </button>
-        <button className="bg-transparent border border-white/30 text-white text-[10px] px-1.5 py-0.5 rounded-sm cursor-pointer">
-          A+
-        </button>
+    <div className="bg-sp-black text-sp-white">
+      <div className="sp-container flex min-h-10 items-center gap-4 py-2 text-[11px]">
+        <span className="sp-subtitle text-xs text-sp-white">
+          Governo do Estado de São Paulo
+        </span>
+        <div className="ml-auto hidden items-center gap-5 md:flex">
+          {links.map((link) => (
+            <a
+              key={link}
+              href="#"
+              className="text-sp-white/82 no-underline transition-colors hover:text-sp-white"
+            >
+              {link}
+            </a>
+          ))}
+        </div>
+        <div className="ml-auto flex items-center gap-1 md:ml-0">
+          <button
+            type="button"
+            aria-label="Reduzir tamanho do texto"
+            className="h-7 min-w-7 rounded-md border border-sp-white/30 bg-transparent px-2 text-[10px] text-sp-white transition-colors hover:bg-sp-white/10"
+          >
+            A-
+          </button>
+          <button
+            type="button"
+            aria-label="Aumentar tamanho do texto"
+            className="h-7 min-w-7 rounded-md border border-sp-white/30 bg-transparent px-2 text-[10px] text-sp-white transition-colors hover:bg-sp-white/10"
+          >
+            A+
+          </button>
+        </div>
       </div>
     </div>
   );
