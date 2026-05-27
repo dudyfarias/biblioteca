@@ -67,7 +67,7 @@ const CATEGORIES = [
   },
 ];
 
-const QUICK_TAGS = ["Pregão eletrônico", "ODS", "Contratos", "PCA", "TCE-SP", "ENAP"];
+const QUICK_TAGS = ["Contratação Direta", "Pregão", "Registro de Preços", "ODS", "TCE"];
 
 const STATS = [
   ["783", "Documentos catalogados"],

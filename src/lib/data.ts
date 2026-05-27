@@ -2,17 +2,18 @@ import type { Documento, Assunto, Categoria, Colecao, Complexidade } from "./typ
 
 export const ASSUNTOS: Assunto[] = [
   "Aspectos Jurídicos e Regulatórios",
-  "Sustentabilidade e ODS",
+  "Controle, Auditoria e Combate à Corrupção",
+  "Gestão de Competências",
   "Governança",
-  "Logística e Gestão de Suprimentos",
-  "TIC",
-  "Micro e Pequenas Empresas",
-  "Conteúdos Transversais",
   "Inovação e Tecnologia",
-  "Serviços",
+  "Materiais",
   "Obras e Serviços de Engenharia",
   "Sanções Administrativas",
-  "Integridade",
+  "Serviços",
+  "Sistemas",
+  "Sustentabilidade e ODS",
+  "TIC",
+  "Transparência",
 ];
 
 export const CATEGORY_TREE: {
@@ -134,36 +135,54 @@ export function getMicrocategoriaOptions(categoria: string, subcategoria: string
 }
 
 export const COLECOES: Record<Colecao, string[]> = {
-  "Trabalhos Acadêmicos": [
-    "Artigos de Periódicos",
-    "Dissertações",
-    "Teses",
-    "TCCs",
-    "Monografias",
-    "Memoriais Docentes",
-  ],
-  "Materiais Pedagógicos": [
-    "Apostilas",
-    "Manuais",
-    "Textos de Discussão",
-    "Slides",
-    "Vídeos",
-    "Relatórios",
-    "Guias",
-    "Notas Técnicas",
-    "Cursos",
+  Eventos: [
+    "Colóquios",
+    "Conferências",
+    "Congressos",
+    "Encontros",
+    "Fóruns",
+    "Jornadas",
+    "Mesas redondas",
+    "Painéis",
+    "Seminários",
+    "Simpósios",
+    "Workshops",
   ],
   "Livros Digitais": [
-    "Livro no Todo",
-    "Capítulo de Livro",
+    "Livro",
     "E-book",
-    "Livros Digitalizados",
+    "Livros digitalizados",
   ],
-  Eventos: [
-    "Artigos de Eventos",
-    "Apresentações",
-    "Resumos",
-    "Resumos Expandidos",
+  "Materiais Pedagógicos": [],
+  "Trabalhos Acadêmicos": [],
+};
+
+export const TIPOS_INFORMACAO_POR_COLECAO: Record<Colecao, string[]> = {
+  Eventos: ["Apresentações", "Artigos de eventos", "Resumos", "Resumos expandidos"],
+  "Livros Digitais": ["Livro no todo", "Capítulo de livro", "Parte de livro"],
+  "Materiais Pedagógicos": [
+    "Apostila",
+    "Aulas",
+    "Cursos",
+    "Manuais",
+    "Relatórios",
+    "Slides",
+    "Textos de discussão",
+    "Tutoriais",
+    "Vídeos",
+    "Artigos",
+    "Guias",
+    "Nota Técnica",
+    "Enunciados",
+    "Documentos normativos",
+  ],
+  "Trabalhos Acadêmicos": [
+    "Dissertações",
+    "Memoriais docentes",
+    "TCCs",
+    "Teses",
+    "Artigos de periódicos",
+    "Monografias",
   ],
 };
 
@@ -265,7 +284,7 @@ export const SAMPLE_DOCS: Documento[] = [
     id: 2,
     type: "artigo",
     colecao: "Trabalhos Acadêmicos",
-    tipoInfo: "Artigos de Periódicos",
+    tipoInfo: "Artigos de periódicos",
     assunto: "Sustentabilidade e ODS",
     categoria: "Seleção do Fornecedor",
     subcategoria: "Licitação",
@@ -295,7 +314,7 @@ export const SAMPLE_DOCS: Documento[] = [
     id: 3,
     type: "artigo",
     colecao: "Trabalhos Acadêmicos",
-    tipoInfo: "Artigos de Periódicos",
+    tipoInfo: "Artigos de periódicos",
     assunto: "Governança",
     categoria: "Seleção do Fornecedor",
     subcategoria: "Licitação",
@@ -324,8 +343,8 @@ export const SAMPLE_DOCS: Documento[] = [
     id: 4,
     type: "artigo",
     colecao: "Trabalhos Acadêmicos",
-    tipoInfo: "Artigos de Periódicos",
-    assunto: "Logística e Gestão de Suprimentos",
+    tipoInfo: "Artigos de periódicos",
+    assunto: "Materiais",
     categoria: "Conteúdos Transversais",
     subcategoria: "Logística e Gestão de Suprimentos",
     autorPrincipal: "Vaz, José Carlos",
@@ -347,8 +366,8 @@ export const SAMPLE_DOCS: Documento[] = [
     id: 5,
     type: "livro",
     colecao: "Livros Digitais",
-    tipoInfo: "Livro no Todo",
-    assunto: "Logística e Gestão de Suprimentos",
+    tipoInfo: "Livro no todo",
+    assunto: "Materiais",
     categoria: "Contratação Todas as Fases",
     subcategoria: "Contratação Todas as Fases",
     autorPrincipal: "Thai, Khi V.",
@@ -369,8 +388,8 @@ export const SAMPLE_DOCS: Documento[] = [
     id: 6,
     type: "apostila",
     colecao: "Materiais Pedagógicos",
-    tipoInfo: "Apostilas",
-    assunto: "Logística e Gestão de Suprimentos",
+    tipoInfo: "Apostila",
+    assunto: "Materiais",
     categoria: "Conteúdos Transversais",
     subcategoria: "Logística e Gestão de Suprimentos",
     autorPrincipal: "Lino, Gustavo",
@@ -392,7 +411,7 @@ export const SAMPLE_DOCS: Documento[] = [
     id: 7,
     type: "artigo",
     colecao: "Trabalhos Acadêmicos",
-    tipoInfo: "Artigos de Periódicos",
+    tipoInfo: "Artigos de periódicos",
     assunto: "Sustentabilidade e ODS",
     categoria: "Seleção do Fornecedor",
     subcategoria: "Licitação",
@@ -421,7 +440,7 @@ export const SAMPLE_DOCS: Documento[] = [
     id: 8,
     type: "artigo",
     colecao: "Trabalhos Acadêmicos",
-    tipoInfo: "Artigos de Periódicos",
+    tipoInfo: "Artigos de periódicos",
     assunto: "TIC",
     categoria: "Contratação Todas as Fases",
     subcategoria: "Contratação Todas as Fases",
@@ -447,7 +466,7 @@ export const SAMPLE_DOCS: Documento[] = [
     id: 9,
     type: "artigo",
     colecao: "Trabalhos Acadêmicos",
-    tipoInfo: "Artigos de Periódicos",
+    tipoInfo: "Artigos de periódicos",
     assunto: "Aspectos Jurídicos e Regulatórios",
     categoria: "Seleção do Fornecedor",
     subcategoria: "Contratação Direta",
@@ -470,7 +489,7 @@ export const SAMPLE_DOCS: Documento[] = [
     id: 10,
     type: "caplivro",
     colecao: "Livros Digitais",
-    tipoInfo: "Capítulo de Livro",
+    tipoInfo: "Capítulo de livro",
     assunto: "Sustentabilidade e ODS",
     categoria: "Contratação Todas as Fases",
     subcategoria: "Contratação Todas as Fases",
@@ -504,6 +523,7 @@ export function filterDocuments(
   filters: {
     query?: string;
     colecao?: string | string[];
+    tipoInfo?: string | string[];
     assunto?: string | string[];
     categoria?: string | string[];
     subcategoria?: string | string[];
@@ -530,6 +550,7 @@ export function filterDocuments(
       d.subcategoria?.toLowerCase().includes(q) ||
       d.microcategoria?.toLowerCase().includes(q);
     const matchColecao = matchesFilter(d.colecao, filters.colecao);
+    const matchTipoInfo = matchesFilter(d.tipoInfo, filters.tipoInfo);
     const matchAssunto = matchesFilter(d.assunto, filters.assunto);
     const matchCategoria = matchesFilter(d.categoria, filters.categoria);
     const matchSubcategoria = matchesFilter(d.subcategoria, filters.subcategoria);
@@ -539,6 +560,7 @@ export function filterDocuments(
     return (
       matchQuery &&
       matchColecao &&
+      matchTipoInfo &&
       matchAssunto &&
       matchCategoria &&
       matchSubcategoria &&

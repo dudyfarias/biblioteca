@@ -16,13 +16,12 @@ import {
   CATEGORIAS,
   getMicrocategoriaOptions,
   getSubcategoriaOptions,
-  COMPLEXIDADES,
   COLECOES,
+  TIPOS_INFORMACAO_POR_COLECAO,
   filterDocuments,
 } from "@/lib/data";
 
 const COLECAO_KEYS = Object.keys(COLECOES);
-const ACESSO_OPTS = ["Aberto", "Restrito"];
 
 function toggleValue(values: string[], value: string): string[] {
   return values.includes(value)
@@ -76,12 +75,17 @@ function SideSection({ label, children }: { label: string; children: React.React
 function FilterGroup({
   title,
   children,
+  defaultOpen = false,
 }: {
   title: string;
   children: React.ReactNode;
+  defaultOpen?: boolean;
 }) {
   return (
-    <details open className="rounded-md border border-sp-gray-medium/70 bg-sp-white">
+    <details
+      {...(defaultOpen ? { open: true } : {})}
+      className="rounded-md border border-sp-gray-medium/70 bg-sp-white"
+    >
       <summary className="cursor-pointer px-3 py-2 text-[12px] text-sp-black sp-subtitle">
         {title}
       </summary>
@@ -105,12 +109,11 @@ function AcervoContent() {
   const [query, setQuery] = useState(initialQuery);
   const [page, setPage] = useState(1);
   const [filterColecoes, setFilterColecoes] = useState<string[]>([]);
+  const [filterTiposInfo, setFilterTiposInfo] = useState<string[]>([]);
   const [filterAssuntos, setFilterAssuntos] = useState<string[]>([]);
   const [filterCategorias, setFilterCategorias] = useState<string[]>([]);
   const [filterSubcategorias, setFilterSubcategorias] = useState<string[]>([]);
   const [filterMicrocategorias, setFilterMicrocategorias] = useState<string[]>([]);
-  const [filterComplexidades, setFilterComplexidades] = useState<string[]>([]);
-  const [filterAcessos, setFilterAcessos] = useState<string[]>([]);
 
   const subcategoriaGroups = useMemo(
     () =>
@@ -141,49 +144,50 @@ function AcervoContent() {
       filterDocuments(SAMPLE_DOCS, {
         query,
         colecao: filterColecoes,
+        tipoInfo: filterTiposInfo,
         assunto: filterAssuntos,
         categoria: filterCategorias,
         subcategoria: filterSubcategorias,
         microcategoria: filterMicrocategorias,
-        complexidade: filterComplexidades,
-        acesso: filterAcessos,
       }),
     [
       query,
       filterColecoes,
+      filterTiposInfo,
       filterAssuntos,
       filterCategorias,
       filterSubcategorias,
       filterMicrocategorias,
-      filterComplexidades,
-      filterAcessos,
     ],
   );
 
   const activeFilterCount =
     filterColecoes.length +
+    filterTiposInfo.length +
     filterAssuntos.length +
     filterCategorias.length +
     filterSubcategorias.length +
-    filterMicrocategorias.length +
-    filterComplexidades.length +
-    filterAcessos.length;
+    filterMicrocategorias.length;
 
   const hasFilters = activeFilterCount > 0;
 
   const clearFilters = () => {
     setFilterColecoes([]);
+    setFilterTiposInfo([]);
     setFilterAssuntos([]);
     setFilterCategorias([]);
     setFilterSubcategorias([]);
     setFilterMicrocategorias([]);
-    setFilterComplexidades([]);
-    setFilterAcessos([]);
     setPage(1);
   };
 
   const toggleColecao = (value: string) => {
     setFilterColecoes((current) => toggleValue(current, value));
+    setPage(1);
+  };
+
+  const toggleTipoInfo = (value: string) => {
+    setFilterTiposInfo((current) => toggleValue(current, value));
     setPage(1);
   };
 
@@ -230,16 +234,6 @@ function AcervoContent() {
 
   const toggleMicrocategoria = (value: string) => {
     setFilterMicrocategorias((current) => toggleValue(current, value));
-    setPage(1);
-  };
-
-  const toggleComplexidade = (value: string) => {
-    setFilterComplexidades((current) => toggleValue(current, value));
-    setPage(1);
-  };
-
-  const toggleAcesso = (value: string) => {
-    setFilterAcessos((current) => toggleValue(current, value));
     setPage(1);
   };
 
@@ -310,8 +304,25 @@ function AcervoContent() {
               ))}
             </SideSection>
 
+            <SideSection label="Tipo de informação">
+              <div className="space-y-2">
+                {Object.entries(TIPOS_INFORMACAO_POR_COLECAO).map(([colecao, tipos]) => (
+                  <FilterGroup key={colecao} title={colecao}>
+                    {tipos.map((tipo) => (
+                      <ToggleOpt
+                        key={tipo}
+                        value={tipo}
+                        selected={filterTiposInfo.includes(tipo)}
+                        onToggle={toggleTipoInfo}
+                      />
+                    ))}
+                  </FilterGroup>
+                ))}
+              </div>
+            </SideSection>
+
             <SideSection label="Assunto">
-              {ASSUNTOS.slice(0, 6).map((assunto) => (
+              {ASSUNTOS.map((assunto) => (
                 <ToggleOpt
                   key={assunto}
                   value={assunto}
@@ -337,7 +348,7 @@ function AcervoContent() {
                     Subcategorias
                   </div>
                   {subcategoriaGroups.map(({ categoria, subcategorias }) => (
-                    <FilterGroup key={categoria} title={categoria}>
+                    <FilterGroup key={categoria} title={categoria} defaultOpen>
                       {subcategorias.map((subcategoria) => (
                         <ToggleOpt
                           key={`${categoria}-${subcategoria}`}
@@ -357,7 +368,7 @@ function AcervoContent() {
                     Microcategorias
                   </div>
                   {microcategoriaGroups.map(({ categoria, subcategoria, microcategorias }) => (
-                    <FilterGroup key={`${categoria}-${subcategoria}`} title={subcategoria}>
+                    <FilterGroup key={`${categoria}-${subcategoria}`} title={subcategoria} defaultOpen>
                       {microcategorias.map((microcategoria) => (
                         <ToggleOpt
                           key={`${categoria}-${subcategoria}-${microcategoria}`}
@@ -372,27 +383,6 @@ function AcervoContent() {
               )}
             </SideSection>
 
-            <SideSection label="Complexidade">
-              {COMPLEXIDADES.map((complexidade) => (
-                <ToggleOpt
-                  key={complexidade}
-                  value={complexidade}
-                  selected={filterComplexidades.includes(complexidade)}
-                  onToggle={toggleComplexidade}
-                />
-              ))}
-            </SideSection>
-
-            <SideSection label="Acesso">
-              {ACESSO_OPTS.map((acesso) => (
-                <ToggleOpt
-                  key={acesso}
-                  value={acesso}
-                  selected={filterAcessos.includes(acesso)}
-                  onToggle={toggleAcesso}
-                />
-              ))}
-            </SideSection>
           </aside>
 
           <div className="min-w-0">

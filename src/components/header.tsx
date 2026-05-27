@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { FiLogIn } from "react-icons/fi";
 import { GovernmentLogo, LibraryMark } from "@/components/sp-identity";
 
 const NAV_ITEMS = [
@@ -49,13 +48,6 @@ export function Header() {
           })}
         </nav>
 
-        <Link
-          href="/login"
-          className="sp-button-primary h-11 shrink-0 px-4 text-[13px] no-underline"
-        >
-          <FiLogIn aria-hidden="true" />
-          <span>Entrar</span>
-        </Link>
       </div>
       <div className="h-1 bg-[linear-gradient(90deg,#000000_0_24%,#FFFFFF_24%_30%,#FF161F_30%_58%,#034EA2_58%_100%)]" />
     </header>

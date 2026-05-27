@@ -1,16 +1,17 @@
 export type Assunto =
   | "Aspectos Jurídicos e Regulatórios"
-  | "Sustentabilidade e ODS"
+  | "Controle, Auditoria e Combate à Corrupção"
+  | "Gestão de Competências"
   | "Governança"
-  | "Logística e Gestão de Suprimentos"
-  | "TIC"
-  | "Micro e Pequenas Empresas"
-  | "Conteúdos Transversais"
   | "Inovação e Tecnologia"
-  | "Serviços"
+  | "Materiais"
   | "Obras e Serviços de Engenharia"
   | "Sanções Administrativas"
-  | "Integridade";
+  | "Serviços"
+  | "Sistemas"
+  | "Sustentabilidade e ODS"
+  | "TIC"
+  | "Transparência";
 
 export type Categoria =
   | "Contratação Todas as Fases"
