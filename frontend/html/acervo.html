@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Acervo | Biblioteca Digital de Logística Pública</title>
+    <meta name="description" content="Consulta ao acervo institucional da Biblioteca Digital de Logística Pública.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="app.js" defer></script>
+  </head>
+  <body data-page="acervo">
+    <div class="govbar">
+      <div class="container govbar-inner">
+        <strong>Governo do Estado de São Paulo</strong>
+        <nav class="govlinks" aria-label="Acesso institucional">
+          <a href="#">Ouvidoria</a>
+          <a href="#">Transparência</a>
+          <a href="#">SIC</a>
+          <a href="#">Acesso à Informação</a>
+        </nav>
+        <div class="accessibility" aria-label="Tamanho do texto">
+          <button type="button" aria-label="Reduzir tamanho do texto">A-</button>
+          <button type="button" aria-label="Aumentar tamanho do texto">A+</button>
+        </div>
+      </div>
+    </div>
+
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="identity" href="index.html">
+          <img src="assets/sp-gov-br-horizontal-rgb.png" alt="SP.GOV.BR - Governo do Estado de São Paulo">
+          <span class="divider" aria-hidden="true"></span>
+          <span class="library-mark">
+            <span class="book" aria-hidden="true">▣</span>
+            <span><strong>Biblioteca Digital</strong><small>Logística Pública</small></span>
+          </span>
+        </a>
+        <nav class="primary-nav" aria-label="Navegação principal">
+          <a href="index.html">Início</a>
+          <a class="active" href="acervo.html">Acervo</a>
+          <a href="acervo.html">Categorias</a>
+          <a href="#">Autores</a>
+          <a href="#">Sobre</a>
+        </nav>
+      </div>
+      <div class="state-stripe" aria-hidden="true"></div>
+    </header>
+
+    <main>
+      <section class="catalog-hero">
+        <div class="container">
+          <div class="breadcrumb">Biblioteca Digital de Logística Pública / Consulta</div>
+          <div class="catalog-hero-grid">
+            <div>
+              <span class="eyebrow">Acervo</span>
+              <h1>Pesquisa institucional</h1>
+              <p>Consulte documentos técnicos, acadêmicos e pedagógicos sobre logística pública, licitações e gestão de suprimentos.</p>
+            </div>
+            <form class="search-bar" id="catalog-search" role="search">
+              <label class="sr-only" for="catalog-query">Buscar no acervo</label>
+              <input id="catalog-query" name="q" type="search" placeholder="Buscar no acervo">
+              <button class="primary-button" type="submit">Buscar</button>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <div class="container trail"><a href="index.html">Início</a><span>/</span><span>Acervo</span></div>
+
+      <section class="container catalog-layout">
+        <aside class="filter-panel" aria-label="Filtros do acervo">
+          <div class="filters-header">
+            <h2>Filtros</h2>
+            <button class="clear-button" id="clear-filters" type="button" hidden>Limpar <span id="active-count"></span></button>
+          </div>
+          <section class="filter-section">
+            <h3>Coleção</h3>
+            <div id="filter-colecao"></div>
+          </section>
+          <section class="filter-section">
+            <h3>Tipo de informação</h3>
+            <div id="filter-tipo"></div>
+          </section>
+          <section class="filter-section">
+            <h3>Assunto</h3>
+            <div id="filter-assunto"></div>
+          </section>
+          <section class="filter-section">
+            <h3>Categorias</h3>
+            <div id="filter-categoria"></div>
+            <div id="filter-subcategoria"></div>
+            <div id="filter-microcategoria"></div>
+          </section>
+        </aside>
+
+        <div class="catalog-results">
+          <div class="results-header">
+            <div>
+              <span>Resultados encontrados</span>
+              <strong id="results-count" aria-live="polite">0 documentos</strong>
+            </div>
+            <label>Ordenar por
+              <select id="sort-documents">
+                <option value="recent">Mais recente</option>
+                <option value="title">Título A-Z</option>
+              </select>
+            </label>
+          </div>
+          <p class="query-indicator" id="query-indicator" hidden></p>
+          <div class="result-list" id="document-results"></div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer compact-footer">
+      <div class="footer-stripe" aria-hidden="true"></div>
+      <div class="container footer-grid">
+        <div class="footer-identity">
+          <img src="assets/sp-gov-br-vertical-white.png" alt="SP.GOV.BR - Governo do Estado de São Paulo">
+          <div><strong>Biblioteca Digital</strong><span>Logística Pública</span></div>
+          <p>Biblioteca Digital de Logística Pública do Governo do Estado de São Paulo. Secretaria de Gestão e Governo Digital.</p>
+        </div>
+        <div class="footer-column">
+          <strong>Biblioteca</strong>
+          <a href="#">Portal de Compras SP</a><a href="#">Laboratório de Logística</a><a href="#">Legislação NLLC</a><a href="#">Capacitação</a>
+        </div>
+        <div class="footer-column">
+          <strong>Governo SP</strong>
+          <a href="#">Ouvidoria</a><a href="#">Transparência</a><a href="#">SIC</a><a href="#">Acesso à Informação</a>
+        </div>
+      </div>
+      <div class="container copyright"><span>© 2026 Governo do Estado de São Paulo - SGGD</span><span>Desenvolvido por Prodesp</span></div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Biblioteca Digital de Logística Pública | Governo de São Paulo</title>
+    <meta name="description" content="Acervo institucional de logística pública do Governo do Estado de São Paulo.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="app.js" defer></script>
+  </head>
+  <body data-page="home">
+    <div class="govbar">
+      <div class="container govbar-inner">
+        <strong>Governo do Estado de São Paulo</strong>
+        <nav class="govlinks" aria-label="Acesso institucional">
+          <a href="#">Ouvidoria</a>
+          <a href="#">Transparência</a>
+          <a href="#">SIC</a>
+          <a href="#">Acesso à Informação</a>
+        </nav>
+        <div class="accessibility" aria-label="Tamanho do texto">
+          <button type="button" aria-label="Reduzir tamanho do texto">A-</button>
+          <button type="button" aria-label="Aumentar tamanho do texto">A+</button>
+        </div>
+      </div>
+    </div>
+
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="identity" href="index.html">
+          <img src="assets/sp-gov-br-horizontal-rgb.png" alt="SP.GOV.BR - Governo do Estado de São Paulo">
+          <span class="divider" aria-hidden="true"></span>
+          <span class="library-mark">
+            <span class="book" aria-hidden="true">▣</span>
+            <span><strong>Biblioteca Digital</strong><small>Logística Pública</small></span>
+          </span>
+        </a>
+        <nav class="primary-nav" aria-label="Navegação principal">
+          <a class="active" href="index.html">Início</a>
+          <a href="acervo.html">Acervo</a>
+          <a href="acervo.html">Categorias</a>
+          <a href="#">Autores</a>
+          <a href="#">Sobre</a>
+        </nav>
+      </div>
+      <div class="state-stripe" aria-hidden="true"></div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="container">
+          <div class="institutional-label">Plataforma oficial de conhecimento e inovação pública</div>
+          <h1>Biblioteca Digital de<br>Logística Pública</h1>
+          <p class="hero-copy">
+            Acervo institucional de trabalhos acadêmicos, materiais pedagógicos, livros digitais e
+            documentos técnicos para apoiar contratações públicas, governança e gestão de
+            suprimentos no Estado de São Paulo.
+          </p>
+          <form class="search-bar large" data-home-search role="search">
+            <label class="sr-only" for="home-query">Buscar no acervo</label>
+            <input id="home-query" name="q" type="search" placeholder="Buscar no acervo">
+            <button class="primary-button" type="submit">Buscar</button>
+          </form>
+          <div class="quick-filters" aria-label="Filtros rápidos">
+            <button type="button" data-query="Contratação Direta">Contratação Direta</button>
+            <button type="button" data-query="Pregão">Pregão</button>
+            <button type="button" data-query="Registro de Preços">Registro de Preços</button>
+            <button type="button" data-query="ODS">ODS</button>
+            <button type="button" data-query="TCE">TCE</button>
+          </div>
+          <div class="sp-geometry" aria-hidden="true">
+            <span class="shape red"></span>
+            <span class="shape blue"></span>
+            <span class="shape black"></span>
+            <span class="shape aqua"></span>
+          </div>
+        </div>
+      </section>
+
+      <section class="stats" aria-label="Indicadores do acervo">
+        <div class="container stats-grid">
+          <article><strong>783</strong><span>Documentos catalogados</span></article>
+          <article><strong>4</strong><span>Coleções curatoriais</span></article>
+          <article><strong>12</strong><span>Áreas temáticas</span></article>
+          <article><strong>2001-2025</strong><span>Cobertura temporal</span></article>
+        </div>
+      </section>
+
+      <section class="section collections">
+        <div class="container">
+          <div class="section-heading">
+            <div>
+              <span class="eyebrow">Explorar o acervo</span>
+              <h2>Coleções organizadas para tomada de decisão pública</h2>
+            </div>
+            <a class="secondary-button" href="acervo.html">Consultar acervo <span aria-hidden="true">→</span></a>
+          </div>
+          <div class="collection-grid">
+            <a class="collection-card" href="acervo.html?colecao=Trabalhos%20Acadêmicos">
+              <span class="category-icon blue">TA</span><strong>Trabalhos Acadêmicos</strong><small>312 documentos disponíveis</small>
+            </a>
+            <a class="collection-card" href="acervo.html?colecao=Materiais%20Pedagógicos">
+              <span class="category-icon green">MP</span><strong>Materiais Pedagógicos</strong><small>134 documentos disponíveis</small>
+            </a>
+            <a class="collection-card" href="acervo.html?colecao=Livros%20Digitais">
+              <span class="category-icon red">LD</span><strong>Livros Digitais</strong><small>89 documentos disponíveis</small>
+            </a>
+            <a class="collection-card" href="acervo.html?colecao=Eventos">
+              <span class="category-icon petrol">EV</span><strong>Eventos</strong><small>47 documentos disponíveis</small>
+            </a>
+            <a class="collection-card" href="acervo.html?q=Aspectos%20Jurídicos">
+              <span class="category-icon sky">AJ</span><strong>Aspectos Jurídicos</strong><small>248 documentos disponíveis</small>
+            </a>
+            <a class="collection-card" href="acervo.html?q=Sustentabilidade%20e%20ODS">
+              <span class="category-icon green">SO</span><strong>Sustentabilidade e ODS</strong><small>76 documentos disponíveis</small>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section trending">
+        <div class="container">
+          <div class="section-heading">
+            <div>
+              <span class="eyebrow">Temas em alta</span>
+              <h2>Sustentabilidade e ODS</h2>
+            </div>
+            <a class="secondary-button" href="acervo.html?q=Sustentabilidade%20e%20ODS">Ver tema no acervo <span aria-hidden="true">→</span></a>
+          </div>
+          <p class="supporting-copy">Artigos indicados para apoiar compras públicas sustentáveis, desenvolvimento responsável e inovação aplicada à cadeia de suprimentos.</p>
+          <div class="document-grid">
+            <article class="document-card">
+              <span class="badge">Trabalhos Acadêmicos</span>
+              <h3>Objetivos e desafios da política de compras públicas sustentáveis no Brasil</h3>
+              <p>Couto, Hugo Leonnardo Gomides do</p>
+              <footer><span>2016</span><span>Sustentabilidade e ODS</span></footer>
+            </article>
+            <article class="document-card">
+              <span class="badge">Trabalhos Acadêmicos</span>
+              <h3>Compras públicas como política para o desenvolvimento sustentável</h3>
+              <p>Oliveira, Bernardo Carlos S. C. M. de</p>
+              <footer><span>2015</span><span>Sustentabilidade e ODS</span></footer>
+            </article>
+            <article class="document-card">
+              <span class="badge">Livros Digitais</span>
+              <h3>Compras públicas como indutora do desenvolvimento sustentável</h3>
+              <p>Rosario, Estefany Laiana Costa do</p>
+              <footer><span>2023</span><span>Sustentabilidade e ODS</span></footer>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="contribute">
+        <div class="container contribute-inner">
+          <div>
+            <h2>Contribua com o acervo</h2>
+            <p>Pesquisadores e gestores públicos podem submeter artigos e documentos para fortalecer a memória técnica da logística pública.</p>
+          </div>
+          <button class="primary-button" type="button">Submeter documento</button>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-stripe" aria-hidden="true"></div>
+      <div class="container footer-grid">
+        <div class="footer-identity">
+          <img src="assets/sp-gov-br-vertical-white.png" alt="SP.GOV.BR - Governo do Estado de São Paulo">
+          <div>
+            <strong>Biblioteca Digital</strong>
+            <span>Logística Pública</span>
+          </div>
+          <p>Biblioteca Digital de Logística Pública do Governo do Estado de São Paulo. Secretaria de Gestão e Governo Digital.</p>
+        </div>
+        <div class="footer-column">
+          <strong>Biblioteca</strong>
+          <a href="#">Portal de Compras SP</a><a href="#">Laboratório de Logística</a><a href="#">Legislação NLLC</a><a href="#">Capacitação</a>
+        </div>
+        <div class="footer-column">
+          <strong>Governo SP</strong>
+          <a href="#">Ouvidoria</a><a href="#">Transparência</a><a href="#">SIC</a><a href="#">Acesso à Informação</a>
+        </div>
+      </div>
+      <div class="container copyright"><span>© 2026 Governo do Estado de São Paulo - SGGD</span><span>Desenvolvido por Prodesp</span></div>
+    </footer>
+  </body>
+</html>
