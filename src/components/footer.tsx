@@ -8,10 +8,17 @@ const LIBRARY_LINKS = [
   "Capacitação",
 ];
 
+const INSTITUTIONAL_TEXT = {
+  title: "Biblioteca Digital de Logística Pública do Governo do Estado de São Paulo",
+  organization:
+    "Laboratório de Inovação em Logística Pública (LILP), Secretaria de Gestão e Governo Digital (SGGD).",
+  partnership: "Parceria SBU/Unicamp.",
+};
+
 export function Footer() {
   return (
     <footer className="mt-auto bg-sp-black text-sp-white">
-      <div className="h-1 bg-[linear-gradient(90deg,#FF161F_0_36%,#FFFFFF_36%_42%,#034EA2_42%_100%)]" />
+      <div className="h-1 bg-sp-white" />
       <div className="sp-container py-10">
         <div className="grid gap-10 lg:grid-cols-[1.2fr_0.8fr_0.8fr]">
           <div>
@@ -25,10 +32,6 @@ export function Footer() {
                   <LibraryMark />
                 </div>
               </div>
-              <p className="mt-5 max-w-[560px] text-[13px] leading-relaxed text-sp-white/72">
-                Biblioteca Digital de Logística Pública do Governo do Estado de São Paulo.
-                Secretaria de Gestão e Governo Digital.
-              </p>
             </div>
           </div>
 
@@ -36,7 +39,23 @@ export function Footer() {
           <FooterColumn title="Governo SP" items={GOV_LINKS} />
         </div>
 
-        <div className="mt-8 flex flex-col gap-3 border-t border-sp-white/12 pt-5 text-[11px] text-sp-white/55 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-8 border-y border-sp-white/12 py-5">
+          <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center">
+            <div className="max-w-[920px]">
+              <p className="sp-subtitle text-[13px] leading-relaxed text-sp-white">
+                {INSTITUTIONAL_TEXT.title}
+              </p>
+              <p className="mt-1 text-[12px] leading-relaxed text-sp-white/68">
+                {INSTITUTIONAL_TEXT.organization}
+              </p>
+            </div>
+            <div className="rounded-md border border-sp-white/16 bg-sp-white/5 px-4 py-3 text-[12px] leading-relaxed text-sp-white/78">
+              {INSTITUTIONAL_TEXT.partnership}
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-5 flex flex-col gap-3 text-[11px] text-sp-white/55 sm:flex-row sm:items-center sm:justify-between">
           <span>© 2026 Governo do Estado de São Paulo - SGGD</span>
           <span>Desenvolvido por Prodesp</span>
         </div>

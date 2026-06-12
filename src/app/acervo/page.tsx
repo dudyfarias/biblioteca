@@ -249,7 +249,7 @@ function AcervoContent() {
         <section className="border-b border-sp-gray-medium/60 bg-sp-white">
           <div className="sp-container py-8">
             <BreadcrumbInline />
-            <div className="mt-6 grid gap-6 lg:grid-cols-[0.82fr_1.18fr] lg:items-end">
+            <div className="mt-6 max-w-[760px]">
               <div>
                 <div className="sp-subtitle mb-2 text-[12px] uppercase text-sp-red">Acervo</div>
                 <h1 className="sp-title text-[36px] leading-tight text-sp-black md:text-[46px]">
@@ -260,14 +260,16 @@ function AcervoContent() {
                   pública, licitações e gestão de suprimentos.
                 </p>
               </div>
-              <SearchBar
-                value={query}
-                onChange={(q) => {
-                  setQuery(q);
-                  setPage(1);
-                }}
-                onSearch={() => setPage(1)}
-              />
+              <div className="mt-6 max-w-[640px]">
+                <SearchBar
+                  value={query}
+                  onChange={(q) => {
+                    setQuery(q);
+                    setPage(1);
+                  }}
+                  onSearch={() => setPage(1)}
+                />
+              </div>
             </div>
           </div>
         </section>

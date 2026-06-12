@@ -49,7 +49,7 @@ export function Header() {
         </nav>
 
       </div>
-      <div className="h-1 bg-[linear-gradient(90deg,#000000_0_24%,#FFFFFF_24%_30%,#FF161F_30%_58%,#034EA2_58%_100%)]" />
+      <div className="h-1 bg-sp-red" />
     </header>
   );
 }
