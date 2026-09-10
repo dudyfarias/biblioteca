@@ -2,6 +2,7 @@ import { GovernmentLogo, LibraryMark } from "@/components/sp-identity";
 
 const GOV_LINKS = ["Ouvidoria", "Transparência", "SIC", "Acesso à Informação"];
 const LIBRARY_LINKS = [
+  { label: "Metodologia de classificação", href: "/metodologia" },
   "Portal de Compras SP",
   "Laboratório de Logística",
   "Legislação NLLC",
@@ -64,18 +65,18 @@ export function Footer() {
   );
 }
 
-function FooterColumn({ title, items }: { title: string; items: string[] }) {
+function FooterColumn({ title, items }: { title: string; items: (string | { label: string; href: string })[] }) {
   return (
     <div>
       <h2 className="sp-subtitle mb-4 text-[13px] text-sp-white">{title}</h2>
       <ul className="space-y-2">
         {items.map((item) => (
-          <li key={item}>
+          <li key={typeof item === "string" ? item : item.label}>
             <a
-              href="#"
+              href={typeof item === "string" ? "#" : item.href}
               className="text-[12px] text-sp-white/70 no-underline transition-colors hover:text-sp-white"
             >
-              {item}
+              {typeof item === "string" ? item : item.label}
             </a>
           </li>
         ))}

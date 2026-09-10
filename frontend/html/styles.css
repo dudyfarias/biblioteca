@@ -39,6 +39,10 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+body[data-page="metodologia"] [hidden] {
+  display: none !important;
+}
+
 a {
   color: inherit;
   text-decoration: none;
@@ -135,6 +139,7 @@ summary:focus-visible {
 .header-inner {
   min-height: 78px;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 28px;
   padding-block: 12px;
@@ -191,6 +196,7 @@ summary:focus-visible {
 
 .primary-nav {
   display: flex;
+  flex-wrap: wrap;
   gap: 3px;
   margin-left: auto;
 }
@@ -798,6 +804,16 @@ h3 {
   font-size: 14px;
 }
 
+.filter-methodology {
+  display: inline-block;
+  padding-block: 8px;
+  color: var(--blue);
+  font-size: 12px;
+  line-height: 1.6;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
 .clear-button {
   min-height: 29px;
   border: 1px solid rgb(255 22 31 / 0.26);
@@ -1015,8 +1031,9 @@ h3 {
     display: none;
   }
 
-  .primary-nav a:nth-child(n+3) {
-    display: none;
+  .primary-nav {
+    width: 100%;
+    margin-left: 0;
   }
 
   .stats-grid,

@@ -2,11 +2,13 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { FiMenu } from "react-icons/fi";
 import { GovernmentLogo, LibraryMark } from "@/components/sp-identity";
 
 const NAV_ITEMS = [
   { label: "Início", href: "/" },
   { label: "Acervo", href: "/acervo" },
+  { label: "Metodologia", href: "/metodologia" },
   { label: "Categorias", href: "/categorias" },
   { label: "Autores", href: "/autores" },
   { label: "Sobre", href: "/sobre" },
@@ -21,7 +23,7 @@ export function Header() {
         <Link href="/" className="flex shrink-0 items-center gap-4 no-underline">
           <GovernmentLogo compact />
           <div className="hidden h-10 w-px bg-sp-gray-medium lg:block" />
-          <div className="hidden lg:block">
+          <div className="hidden xl:block">
             <LibraryMark compact />
           </div>
         </Link>
@@ -47,7 +49,18 @@ export function Header() {
             );
           })}
         </nav>
-
+        <details className="group ml-auto md:hidden">
+          <summary aria-label="Menu principal" className="flex min-h-11 min-w-11 cursor-pointer list-none items-center justify-center rounded-md border border-sp-gray-medium text-sp-blue focus-visible:outline-2 focus-visible:outline-offset-2 [&::-webkit-details-marker]:hidden">
+            <FiMenu size={22} aria-hidden="true" />
+          </summary>
+          <nav aria-label="Navegação principal móvel" className="absolute top-full right-4 left-4 border border-sp-gray-medium bg-sp-white p-3 shadow-sm">
+            {NAV_ITEMS.map((item) => (
+              <Link key={item.href} href={item.href} aria-current={pathname === item.href ? "page" : undefined} className="block rounded-md px-3 py-3 text-[14px] text-sp-blue hover:bg-sp-gray-light" onClick={(event) => event.currentTarget.closest("details")?.removeAttribute("open")}>
+                {item.label}
+              </Link>
+            ))}
+          </nav>
+        </details>
       </div>
       <div className="h-1 bg-sp-red" />
     </header>

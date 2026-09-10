@@ -2,6 +2,7 @@
 
 import { Suspense, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
+import Link from "next/link";
 import { FiCheck, FiFilter, FiSearch, FiSliders, FiX } from "react-icons/fi";
 import { GovBar } from "@/components/gov-bar";
 import { Header } from "@/components/header";
@@ -294,6 +295,10 @@ function AcervoContent() {
                 </button>
               )}
             </div>
+
+            <Link href="/metodologia" className="mb-3 inline-block text-[12px] text-sp-blue underline underline-offset-4">
+              Entenda a classificação dos materiais
+            </Link>
 
             <SideSection label="Coleção">
               {COLECAO_KEYS.map((colecao) => (
