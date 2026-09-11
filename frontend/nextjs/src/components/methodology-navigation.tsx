@@ -1,46 +1,21 @@
-"use client";
-
-import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { FiArrowRight } from "react-icons/fi";
 
-const sections = [
-  { id: "trilha", label: "Conceitos e coleções" },
-  { id: "assuntos", label: "Os 14 assuntos" },
-  { id: "duvidas", label: "Perguntas frequentes" },
+const pages = [
+  { href: "/metodologia", label: "Conceitos e coleções" },
+  { href: "/metodologia/assuntos", label: "Assuntos" },
+  { href: "/metodologia/perguntas-frequentes", label: "Perguntas frequentes" },
 ];
 
-export function MethodologyNavigation() {
-  const [active, setActive] = useState("trilha");
-  const navRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    let frame = 0;
-    const update = () => {
-      cancelAnimationFrame(frame);
-      frame = requestAnimationFrame(() => {
-        const threshold = Math.max(120, (navRef.current?.getBoundingClientRect().bottom ?? 138) + 40);
-        let current = sections[0].id;
-        for (const section of sections) {
-          if ((document.getElementById(section.id)?.getBoundingClientRect().top ?? Infinity) <= threshold) current = section.id;
-        }
-        setActive(current);
-      });
-    };
-    update();
-    window.addEventListener("scroll", update, { passive: true });
-    window.addEventListener("resize", update);
-    return () => {
-      cancelAnimationFrame(frame);
-      window.removeEventListener("scroll", update);
-      window.removeEventListener("resize", update);
-    };
-  }, []);
-
+export function MethodologyNavigation({ activePath }: { activePath: string }) {
   return (
-    <nav ref={navRef} className="method-jumpnav" aria-label="Nesta página">
+    <nav className="method-jumpnav" aria-label="Metodologia">
       <div className="method-container">
-        {sections.map(({ id, label }) => <a key={id} href={`#${id}`} aria-current={active === id ? "location" : undefined}>{label}</a>)}
+        {pages.map(({ href, label }) => (
+          <Link key={href} href={href} aria-current={activePath === href ? "page" : undefined}>
+            {label}
+          </Link>
+        ))}
         <Link className="method-jump-acervo" href="/acervo">Consultar acervo <FiArrowRight aria-hidden="true" /></Link>
       </div>
     </nav>

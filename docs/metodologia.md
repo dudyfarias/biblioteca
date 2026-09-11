@@ -1,13 +1,21 @@
 # Metodologia de classificação
 
-A página `/metodologia` explica os seis campos de classificação e distingue a obrigatoriedade da catalogação da escolha livre de filtros na consulta.
+A metodologia está organizada em três páginas independentes. O menu mantém o visual institucional, mas cada item abre uma URL própria em vez de rolar para uma seção.
+
+| Página | Endereço | Conteúdo |
+| --- | --- | --- |
+| Conceitos e coleções | `/metodologia` | Seis campos, coleções e tipos, hierarquia e exemplos. |
+| Assuntos | `/metodologia/assuntos` | Busca de assuntos, definições e comparação de temas próximos. |
+| Perguntas frequentes | `/metodologia/perguntas-frequentes` | Dúvidas sobre classificação e consulta ao acervo. |
+
+Cada página tem título, descrição e breadcrumb próprios. Apenas seu conteúdo é renderizado; não são painéis ocultos de uma página única. O item ativo usa `aria-current="page"`, com o mesmo sublinhado vermelho do menu anterior. URLs diretas, recarregamento e histórico do navegador funcionam pela navegação normal do Next.js.
 
 ## Referências
 
 - `CLASSIFICAÇÃO GERAL BIBLIOTECA.xlsx`, aba `Planilha1`, A2:B7: perguntas dos seis campos; A11:B14: quatro coleções e 25 tipos de informação.
 - `Caracterizacao_Assuntos_Taxonomia_BDLP (1).xlsx`, aba `Assuntos`, A2:C15: nomes e definições dos 14 assuntos. A linha de total não é um assunto. A anotação "1 registro" não representa uma contagem deste acervo.
 - Confirmação em 11/09/2026: aplicar as novas planilhas à metodologia e ao acervo. Essas fontes prevalecem sobre as listas anteriores do documento de pedidos e do protótipo.
-- Orientação explícita do usuário em 10/09/2026: coleção, categoria e assunto obrigatórios; subcategoria, microcategoria e natureza quando couber.
+- Orientação explícita do usuário em 10/09/2026: coleção, categoria e assunto obrigatórios; subcategoria, microcategoria e natureza se aplicável.
 - Exemplo enviado pelo usuário: artigo sobre Registro de Preços para aquisição de cadeiras de escritório, agora ajustado à separação de Procedimentos Auxiliares. Natureza continua Material.
 
 Os anexos são referências de conteúdo. Não foram executados comandos ou instruções operacionais presentes neles.
@@ -27,19 +35,20 @@ A célula B3 da classificação geral destaca os procedimentos auxiliares em sep
 
 Natureza mantém os quatro valores já usados na metodologia: Material, Serviços, Obras e Serviços de Engenharia e TIC. A nova planilha confirma a pergunta do campo, mas não enumera seus valores. Natureza identifica o objeto contratado, não qualquer menção ao tema correspondente.
 
-A trilha inicia a explicação dos seis campos. Azul institucional indica obrigatório; azul-claro indica quando couber. Os requisitos também estão escritos. Somente categoria, subcategoria e microcategoria estão conectadas por setas de hierarquia. Os demais campos se somam à classificação.
+A trilha inicia a explicação dos seis campos. Azul institucional indica obrigatório; azul-claro indica se aplicável. Os requisitos também estão escritos. Somente categoria, subcategoria e microcategoria estão conectadas por setas de hierarquia. Os demais campos se somam à classificação.
 
 A interface prioriza o desktop. A trilha usa nós compactos e um painel de resumo no fluxo da página, atualizado por mouse, teclado ou clique. A navegação por teclado tem prioridade sobre o hover. No celular, cada item revela a explicação logo abaixo; um segundo toque a recolhe. A animação respeita a preferência de movimento reduzido.
 
-O agrupamento superior diferencia formato, etapa da contratação com seus desdobramentos, tema e objeto. Setas esquerda/direita e Home/End permitem percorrer os campos no desktop. O menu da página acompanha a seção em leitura; o anúncio automático de acessibilidade informa apenas o campo selecionado, sem repetir o painel inteiro. Chevrons indicam a expansão, e estados de foco, seleção e obrigatoriedade não dependem apenas de cores.
+O agrupamento superior diferencia formato, etapa da contratação com seus desdobramentos, tema e objeto. Setas esquerda/direita e Home/End permitem percorrer os campos no desktop. O anúncio automático de acessibilidade informa apenas o campo selecionado, sem repetir o painel inteiro. Chevrons indicam a expansão, e estados de foco, seleção e obrigatoriedade não dependem apenas de cores. O menu da metodologia identifica a página atual e não muda com a rolagem.
 
-A ordem de leitura é conceito, coleções e tipos, hierarquia e exemplos. A trilha usa resumos conceituais; não antecipa a ficha do artigo. A tabela de coleções inicia aberta, enquanto hierarquia e exemplos podem ser expandidos. Não foi recriada a seção textual que duplicava a trilha. A consulta de assuntos mostra seis itens inicialmente e permite expandir os 14. A busca ignora diferenças de caixa e acentos e pesquisa todas as definições.
+Na página de conceitos, a ordem de leitura é conceito, coleções e tipos, hierarquia e exemplos. A trilha usa resumos conceituais; não antecipa a ficha do artigo. A tabela de coleções inicia aberta, enquanto hierarquia e exemplos podem ser expandidos. Não foi recriada a seção textual que duplicava a trilha. Na página de assuntos, a consulta mostra seis itens inicialmente e permite expandir os 14. A busca ignora diferenças de caixa e acentos e pesquisa todas as definições.
 
 ## Integração
 
 - Aplicação principal: `src/app/metodologia/`.
 - Entrega Next.js independente: `frontend/nextjs/src/app/metodologia/`.
-- Entrega HTML independente: `frontend/html/metodologia.html`, com CSS e JavaScript próprios.
+- Estrutura compartilhada: `src/components/methodology-page.tsx`, com cabeçalho, navegação, título, breadcrumb, acesso ao acervo e rodapé.
+- Entrega HTML independente: `frontend/html/metodologia.html`, `metodologia-assuntos.html` e `metodologia-perguntas-frequentes.html`, com CSS e JavaScript compartilhados.
 - Links de acesso no cabeçalho, rodapé e junto dos filtros do acervo.
 
 ## Adequação dos registros locais
@@ -62,6 +71,6 @@ Filtros aceitam várias opções: alternativas dentro de um campo e combinação
 
 ## Verificação e publicação
 
-Testes de taxonomia e filtragem: `npm run test:taxonomy`. Conferências adicionais: compilação, análise estática, paridade das cópias e testes visuais/interativos no navegador.
+Testes de taxonomia e filtragem: `npm run test:taxonomy`. Conferências adicionais: compilação, análise estática, paridade das cópias e testes visuais/interativos no navegador. Para o menu, verificar URL e título por item, ausência do conteúdo das demais páginas, seleção ativa, acesso direto, recarregamento, voltar/avançar, navegação por teclado e layout desktop/móvel.
 
 Publicação no GitHub e no endereço principal do Vercel autorizada pelo usuário em 11/09/2026. O envio desta aplicação não altera banco de dados externo nem importa o catálogo completo do portal oficial.

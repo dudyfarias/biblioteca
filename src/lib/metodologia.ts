@@ -139,7 +139,7 @@ export const CLASSIFICATION_FIELDS = [
     id: "assunto", name: "Assunto", required: true,
     summary: "Tema central",
     question: "Sobre qual tema o conteúdo trata?",
-    description: "Identifica o foco temático do material entre os 14 assuntos da biblioteca. O assunto pode aparecer em diferentes coleções e etapas da contratação.",
+    description: "Identifica o foco temático do material entre os assuntos da biblioteca. O assunto pode aparecer em diferentes coleções e etapas da contratação.",
     example: "O foco em normas, limitações e cuidados define o assunto Aspectos Jurídicos e Regulatórios.",
   },
   {

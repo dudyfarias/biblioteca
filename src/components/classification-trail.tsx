@@ -18,7 +18,7 @@ export function ClassificationTrail() {
 
   return (
     <section id="trilha" className="method-section" aria-labelledby="trilha-title">
-      <div className="method-section-heading"><div><p className="method-section-number">01 / Conceitos</p><h2 id="trilha-title">Seis campos que se complementam</h2></div><ul className="classification-legend" aria-label="Legenda da classificação"><li><span className="classification-dot required" aria-hidden="true" />Obrigatório</li><li><span className="classification-dot conditional" aria-hidden="true" />Quando couber</li></ul></div>
+      <div className="method-section-heading"><div><p className="method-section-number">Os seis campos</p><h2 id="trilha-title">Campos que se completam</h2></div><ul className="classification-legend" aria-label="Legenda da classificação"><li><span className="classification-dot required" aria-hidden="true" />Obrigatório</li><li><span className="classification-dot conditional" aria-hidden="true" />Se aplicável</li></ul></div>
       <p className="classification-intro">A classificação combina o tipo de informação, a etapa da contratação, o tema e, quando se aplica, o objeto contratado.</p>
       <div className="classification-explorer" data-classification-trail>
         <div className="classification-groups" aria-hidden="true"><span>Formato do material</span><span>Etapa da contratação <FiArrowRight /> desdobramentos</span><span>Tema do conteúdo</span><span>Objeto contratado</span></div>
@@ -35,7 +35,7 @@ export function ClassificationTrail() {
                 event.currentTarget.closest("ol")?.querySelectorAll<HTMLButtonElement>(".classification-node")[next]?.focus();
               }}>
                 <span className="classification-node-top"><span>{String(index + 1).padStart(2, "0")}</span><span className={`classification-dot ${field.required ? "required" : "conditional"}`} aria-hidden="true" /></span>
-                <strong>{field.name}</strong><span className="classification-value">{field.summary}</span><span className="classification-requirement">{field.required ? "Obrigatório" : "Quando couber"}</span><FiChevronDown className="classification-disclosure" aria-hidden="true" />
+                <strong>{field.name}</strong><span className="classification-value">{field.summary}</span><span className="classification-requirement">{field.required ? "Obrigatório" : "Se aplicável"}</span><FiChevronDown className="classification-disclosure" aria-hidden="true" />
               </button>
               <div id={`classificacao-mobile-${field.id}`} className="classification-mobile-detail" hidden={index !== selected}><p className="classification-question">{field.question}</p><p>{field.description}</p></div>
             </li>
@@ -45,7 +45,7 @@ export function ClassificationTrail() {
         <div className="classification-inspector">
           {CLASSIFICATION_FIELDS.map((field, index) => (
             <div key={field.id} id={`classificacao-${field.id}`} className="classification-detail" hidden={index !== (selected ?? 0)}>
-              <div className="classification-detail-heading"><span className="classification-detail-label">0{index + 1} / {field.name}</span><h3>{field.question}</h3><span className="classification-detail-status"><span className={`classification-dot ${field.required ? "required" : "conditional"}`} aria-hidden="true" />{field.required ? "Obrigatório" : "Quando couber"}</span></div>
+              <div className="classification-detail-heading"><span className="classification-detail-label">0{index + 1} / {field.name}</span><h3>{field.question}</h3><span className="classification-detail-status"><span className={`classification-dot ${field.required ? "required" : "conditional"}`} aria-hidden="true" />{field.required ? "Obrigatório" : "Se aplicável"}</span></div>
               <div className="classification-detail-copy"><p>{field.description}</p></div>
             </div>
           ))}

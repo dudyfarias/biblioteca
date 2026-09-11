@@ -72,34 +72,6 @@
     render();
   });
 
-  document.querySelectorAll(".method-jumpnav").forEach((nav) => {
-    const links = Array.from(nav.querySelectorAll('a[href^="#"]'), (link) => ({
-      link,
-      section: document.getElementById(link.getAttribute("href").slice(1)),
-    }));
-    if (!links.length) return;
-    let frame = 0;
-
-    function update() {
-      window.cancelAnimationFrame(frame);
-      frame = window.requestAnimationFrame(() => {
-        const threshold = Math.max(120, nav.getBoundingClientRect().bottom + 40);
-        let current = links[0];
-        links.forEach((item) => {
-          if ((item.section?.getBoundingClientRect().top ?? Infinity) <= threshold) current = item;
-        });
-        links.forEach((item) => {
-          if (item === current) item.link.setAttribute("aria-current", "location");
-          else item.link.removeAttribute("aria-current");
-        });
-      });
-    }
-
-    update();
-    window.addEventListener("scroll", update, { passive: true });
-    window.addEventListener("resize", update);
-  });
-
   function normalizeSearch(value) {
     return value.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLocaleLowerCase("pt-BR").trim();
   }
@@ -138,7 +110,7 @@
       empty.hidden = matching.length !== 0;
       toggle.hidden = isSearching || total <= 6;
       toggle.setAttribute("aria-expanded", String(expanded));
-      toggle.textContent = expanded ? "Mostrar menos" : `Ver os ${total} assuntos`;
+      toggle.textContent = expanded ? "Mostrar menos" : "Ver todos os assuntos";
       counter.textContent = isSearching || !expanded
         ? `${visible.size} de ${total} assuntos`
         : `${total} assuntos`;

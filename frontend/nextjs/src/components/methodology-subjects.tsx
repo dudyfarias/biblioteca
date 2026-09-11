@@ -112,7 +112,7 @@ export function MethodologySubjects() {
             setExpanded((value) => !value);
           }}
         >
-          {expanded ? "Mostrar menos" : `Ver os ${total} assuntos`}
+          {expanded ? "Mostrar menos" : "Ver todos os assuntos"}
         </button>
       )}
     </div>

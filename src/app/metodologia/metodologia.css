@@ -35,8 +35,8 @@
 .method-jumpnav > div { display: flex; gap: 32px; align-items: center; }
 .method-jumpnav a { position: relative; min-height: 52px; display: inline-flex; align-items: center; gap: 8px; text-decoration: none; font: 600 13px/1.5 var(--method-subtitle); color: rgb(0 0 0 / 0.75); }
 .method-jumpnav a:hover { color: var(--method-blue); }
-.method-jumpnav a[aria-current="location"] { color: var(--method-blue); }
-.method-jumpnav a[aria-current="location"]::after { content: ""; position: absolute; bottom: -1px; left: 0; right: 0; height: 3px; background: var(--method-red); }
+.method-jumpnav a[aria-current="page"] { color: var(--method-blue); }
+.method-jumpnav a[aria-current="page"]::after { content: ""; position: absolute; bottom: -1px; left: 0; right: 0; height: 3px; background: var(--method-red); }
 .method-jumpnav .method-jump-acervo { margin-left: auto; color: var(--method-blue); }
 .method-section { padding-block: 36px; }
 .method-section + .method-section { border-top: 1px solid var(--method-border); }
@@ -84,7 +84,7 @@
 .classification-detail-copy { font-size: 14px; }
 .classification-mobile-detail { display: none; }
 @keyframes classification-reveal { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
-.method-more { border-top: 1px solid var(--method-border); }
+.method-more { border-top: 1px solid var(--method-border); margin-bottom: 36px; }
 .method-more > details { border-bottom: 1px solid var(--method-border); }
 .method-more > details > summary { min-height: 68px; padding-block: 14px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
 .method-more > details > summary:hover, .method-faq summary:hover, .method-subject summary:hover { background: var(--method-gray); }
@@ -149,6 +149,13 @@
 .method-next p { margin-top: 8px; font-size: 14px; }
 .method-cta { display: inline-flex; align-items: center; justify-content: center; gap: 12px; min-height: 48px; padding: 12px 20px; border: 1px solid var(--method-blue); color: var(--method-blue); border-radius: 6px; font: 600 13px/1.5 var(--method-subtitle); text-decoration: none; flex-shrink: 0; }
 .method-cta:hover { background: var(--method-blue); color: #fff; }
+@media (min-width: 951px) {
+  /* Shared rows align the introductions, six fields and notes across examples. */
+  .method-examples { row-gap: 0; }
+  .method-example { display: grid; grid-row: span 10; grid-template-rows: subgrid; row-gap: 0; min-width: 0; }
+  .method-example dl { display: grid; grid-row: span 6; grid-template-rows: subgrid; row-gap: 0; }
+  .method-example dl > div { align-content: start; }
+}
 @media (max-width: 1150px) {
   .classification-steps { gap: 16px; }
   .classification-node { padding-inline: 10px; min-height: 192px; }
