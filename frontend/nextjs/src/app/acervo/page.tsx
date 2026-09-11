@@ -3,7 +3,7 @@
 import { Suspense, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
-import { FiCheck, FiFilter, FiSearch, FiSliders, FiX } from "react-icons/fi";
+import { FiFilter, FiSearch, FiSliders, FiX } from "react-icons/fi";
 import { GovBar } from "@/components/gov-bar";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
@@ -14,6 +14,7 @@ import { Pagination } from "@/components/pagination";
 import {
   SAMPLE_DOCS,
   ASSUNTOS,
+  NATUREZAS,
   CATEGORIAS,
   getMicrocategoriaOptions,
   getSubcategoriaOptions,
@@ -42,25 +43,21 @@ function ToggleOpt({
   label?: string;
 }) {
   return (
-    <button
-      type="button"
-      onClick={() => onToggle(value)}
-      className={`flex min-h-8 w-full items-center gap-2 rounded-md px-2 text-left text-[12px] transition-colors ${
+    <label
+      className={`flex min-h-9 w-full cursor-pointer items-center gap-2 rounded-md px-2 py-1.5 text-left text-[12px] leading-relaxed transition-colors ${
         selected
-          ? "bg-gov-red-100 text-sp-red sp-subtitle"
+          ? "bg-sp-blue/5 text-sp-blue sp-subtitle"
           : "text-sp-black/70 hover:bg-sp-gray-light hover:text-sp-black"
       }`}
     >
-      <span
-        className={`flex h-3.5 w-3.5 shrink-0 items-center justify-center rounded-sm border ${
-          selected ? "border-sp-red bg-sp-red text-sp-white" : "border-sp-gray-medium bg-sp-white"
-        }`}
-        aria-hidden="true"
-      >
-        {selected && <FiCheck className="text-[10px]" />}
-      </span>
-      {label ?? value}
-    </button>
+      <input
+        type="checkbox"
+        checked={selected}
+        onChange={() => onToggle(value)}
+        className="h-4 w-4 shrink-0 cursor-pointer accent-sp-blue focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sp-blue"
+      />
+      <span className="min-w-0">{label ?? value}</span>
+    </label>
   );
 }
 
@@ -109,12 +106,17 @@ function AcervoContent() {
 
   const [query, setQuery] = useState(initialQuery);
   const [page, setPage] = useState(1);
-  const [filterColecoes, setFilterColecoes] = useState<string[]>([]);
+  const [filterColecoes, setFilterColecoes] = useState<string[]>(() =>
+    [...new Set(searchParams.getAll("colecao"))].filter((value) => COLECAO_KEYS.includes(value)),
+  );
   const [filterTiposInfo, setFilterTiposInfo] = useState<string[]>([]);
-  const [filterAssuntos, setFilterAssuntos] = useState<string[]>([]);
+  const [filterAssuntos, setFilterAssuntos] = useState<string[]>(() =>
+    [...new Set(searchParams.getAll("assunto"))].filter((value) => ASSUNTOS.some((assunto) => assunto === value)),
+  );
   const [filterCategorias, setFilterCategorias] = useState<string[]>([]);
   const [filterSubcategorias, setFilterSubcategorias] = useState<string[]>([]);
   const [filterMicrocategorias, setFilterMicrocategorias] = useState<string[]>([]);
+  const [filterNaturezas, setFilterNaturezas] = useState<string[]>([]);
 
   const subcategoriaGroups = useMemo(
     () =>
@@ -150,6 +152,7 @@ function AcervoContent() {
         categoria: filterCategorias,
         subcategoria: filterSubcategorias,
         microcategoria: filterMicrocategorias,
+        natureza: filterNaturezas,
       }),
     [
       query,
@@ -159,6 +162,7 @@ function AcervoContent() {
       filterCategorias,
       filterSubcategorias,
       filterMicrocategorias,
+      filterNaturezas,
     ],
   );
 
@@ -168,7 +172,8 @@ function AcervoContent() {
     filterAssuntos.length +
     filterCategorias.length +
     filterSubcategorias.length +
-    filterMicrocategorias.length;
+    filterMicrocategorias.length +
+    filterNaturezas.length;
 
   const hasFilters = activeFilterCount > 0;
 
@@ -179,6 +184,7 @@ function AcervoContent() {
     setFilterCategorias([]);
     setFilterSubcategorias([]);
     setFilterMicrocategorias([]);
+    setFilterNaturezas([]);
     setPage(1);
   };
 
@@ -238,6 +244,11 @@ function AcervoContent() {
     setPage(1);
   };
 
+  const toggleNatureza = (value: string) => {
+    setFilterNaturezas((current) => toggleValue(current, value));
+    setPage(1);
+  };
+
   const totalPages = Math.max(1, Math.ceil(filtered.length / 10));
   const paged = filtered.slice((page - 1) * 10, page * 10);
 
@@ -288,7 +299,7 @@ function AcervoContent() {
                 <button
                   type="button"
                   onClick={clearFilters}
-                  className="inline-flex items-center gap-1 rounded-md border border-sp-red/30 bg-gov-red-100 px-2.5 py-1.5 text-[11px] text-sp-red sp-subtitle"
+                  className="inline-flex items-center gap-1 rounded-md border border-sp-blue/30 px-2.5 py-1.5 text-[11px] text-sp-blue sp-subtitle"
                 >
                   <FiX aria-hidden="true" />
                   Limpar {activeFilterCount}
@@ -390,11 +401,21 @@ function AcervoContent() {
               )}
             </SideSection>
 
+            <SideSection label="Natureza">
+              {NATUREZAS.map((natureza) => (
+                <ToggleOpt
+                  key={natureza}
+                  value={natureza}
+                  selected={filterNaturezas.includes(natureza)}
+                  onToggle={toggleNatureza}
+                />
+              ))}
+            </SideSection>
           </aside>
 
           <div className="min-w-0">
             <div className="sp-panel mb-5 flex flex-col gap-3 p-4 md:flex-row md:items-center md:justify-between">
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-3" role="status" aria-live="polite" aria-atomic="true">
                 <span className="flex h-10 w-10 items-center justify-center rounded-md bg-sp-blue/10 text-sp-blue">
                   <FiFilter aria-hidden="true" />
                 </span>

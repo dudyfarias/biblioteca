@@ -1,12 +1,12 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import {
   FiArrowRight,
   FiAward,
   FiBookOpen,
-  FiCalendar,
   FiFileText,
   FiLayers,
   FiPlusCircle,
@@ -20,48 +20,57 @@ import { SearchBar } from "@/components/search-bar";
 import { Tag } from "@/components/tag";
 import { DocCard } from "@/components/doc-card";
 import { SPGeometry } from "@/components/sp-identity";
-import { SAMPLE_DOCS } from "@/lib/data";
+import { ASSUNTOS, COLECOES, SAMPLE_DOCS, extractYear } from "@/lib/data";
 
-const CATEGORIES = [
-  {
-    icon: <FiLayers />,
-    label: "Trabalhos Acadêmicos",
-    count: 312,
-    color: "text-sp-blue",
-    bg: "bg-sp-blue/10",
-  },
-  {
-    icon: <FiFileText />,
-    label: "Materiais Pedagógicos",
-    count: 134,
-    color: "text-sp-green",
-    bg: "bg-sp-green/10",
-  },
-  {
-    icon: <FiBookOpen />,
-    label: "Livros Digitais",
-    count: 89,
-    color: "text-sp-red",
-    bg: "bg-gov-red-100",
-  },
-  {
-    icon: <FiCalendar />,
-    label: "Eventos",
-    count: 47,
+const COLECAO_STYLE: Record<
+  string,
+  { icon: React.ReactNode; color: string; bg: string }
+> = {
+  Jurisprudência: {
+    icon: <FiShield />,
     color: "text-sp-blue-petrol",
     bg: "bg-sp-olive/10",
   },
+  "Trabalhos Acadêmicos": {
+    icon: <FiLayers />,
+    color: "text-sp-blue",
+    bg: "bg-sp-blue/10",
+  },
+  "Doutrina e Conteúdo Técnico": {
+    icon: <FiBookOpen />,
+    color: "text-sp-red",
+    bg: "bg-gov-red-100",
+  },
+  "Instrução e Capacitação": {
+    icon: <FiFileText />,
+    color: "text-sp-green",
+    bg: "bg-sp-green/10",
+  },
+};
+
+const ASSUNTO_ODS = "Sustentabilidade e ODS";
+const ODS_HREF = `/acervo?${new URLSearchParams({ assunto: ASSUNTO_ODS })}`;
+
+const CATEGORIES = [
+  ...Object.keys(COLECOES).map((colecao) => ({
+    ...COLECAO_STYLE[colecao],
+    label: colecao,
+    count: SAMPLE_DOCS.filter((doc) => doc.colecao === colecao).length,
+    href: `/acervo?${new URLSearchParams({ colecao })}`,
+  })),
   {
     icon: <FiShield />,
-    label: "Aspectos Jurídicos",
-    count: 248,
+    label: "Aspectos Jurídicos e Regulatórios",
+    count: SAMPLE_DOCS.filter((doc) => doc.assunto === "Aspectos Jurídicos e Regulatórios").length,
+    href: `/acervo?${new URLSearchParams({ assunto: "Aspectos Jurídicos e Regulatórios" })}`,
     color: "text-sp-blue-dark",
     bg: "bg-sp-blue-light/20",
   },
   {
     icon: <FiTrendingUp />,
-    label: "Sustentabilidade e ODS",
-    count: 76,
+    label: ASSUNTO_ODS,
+    count: SAMPLE_DOCS.filter((doc) => doc.assunto === ASSUNTO_ODS).length,
+    href: ODS_HREF,
     color: "text-sp-green",
     bg: "bg-sp-green/10",
   },
@@ -69,17 +78,23 @@ const CATEGORIES = [
 
 const QUICK_TAGS = ["Contratação Direta", "Pregão", "Registro de Preços", "ODS", "TCE"];
 
+const YEARS = SAMPLE_DOCS.map((doc) => Number(extractYear(doc.imprenta))).filter(Number.isFinite);
+const FIRST_YEAR = Math.min(...YEARS);
+const LAST_YEAR = Math.max(...YEARS);
 const STATS = [
-  ["783", "Documentos catalogados"],
-  ["4", "Coleções curatoriais"],
-  ["12", "Áreas temáticas"],
-  ["2001-2025", "Cobertura temporal"],
+  [SAMPLE_DOCS.length.toLocaleString("pt-BR"), "Documentos catalogados"],
+  [Object.keys(COLECOES).length.toLocaleString("pt-BR"), "Coleções curatoriais"],
+  [ASSUNTOS.length.toLocaleString("pt-BR"), "Assuntos"],
+  [
+    YEARS.length === 0 ? "Não informada" : FIRST_YEAR === LAST_YEAR ? String(FIRST_YEAR) : `${FIRST_YEAR}-${LAST_YEAR}`,
+    "Cobertura temporal",
+  ],
 ];
 
 const TRENDING_DOCS = SAMPLE_DOCS.filter(
   (doc) =>
     doc.type === "artigo" &&
-    (doc.assunto === "Sustentabilidade e ODS" || doc.tags.includes("Sustentabilidade")),
+    (doc.assunto === ASSUNTO_ODS || doc.tags.includes("Sustentabilidade")),
 ).slice(0, 3);
 
 export default function HomePage() {
@@ -109,8 +124,8 @@ export default function HomePage() {
                 Biblioteca Digital de Logística Pública
               </h1>
               <p className="mt-6 max-w-[690px] text-[16px] leading-relaxed text-sp-black/72">
-                Acervo institucional de trabalhos acadêmicos, materiais pedagógicos,
-                livros digitais e documentos técnicos para apoiar contratações públicas,
+                Acervo institucional de jurisprudência, trabalhos acadêmicos, doutrina,
+                conteúdo técnico e materiais de instrução e capacitação para apoiar contratações públicas,
                 governança e gestão de suprimentos no Estado de São Paulo.
               </p>
 
@@ -120,7 +135,7 @@ export default function HomePage() {
 
               <div className="mt-5 flex flex-wrap gap-2">
                 {QUICK_TAGS.map((tag) => (
-                  <Tag key={tag} onClick={() => handleSearch(tag)}>
+                  <Tag key={tag} onClick={() => tag === "ODS" ? router.push(ODS_HREF) : handleSearch(tag)}>
                     {tag}
                   </Tag>
                 ))}
@@ -150,28 +165,27 @@ export default function HomePage() {
               eyebrow="Explorar o acervo"
               title="Coleções organizadas para tomada de decisão pública"
               action="Consultar acervo"
-              onAction={() => router.push("/acervo")}
+              href="/acervo"
             />
 
             <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
               {CATEGORIES.map((category) => (
-                <button
+                <Link
                   key={category.label}
-                  type="button"
-                  onClick={() => handleSearch(category.label)}
-                  className="sp-card flex min-h-[132px] w-full items-start gap-4 p-5 text-left"
+                  href={category.href}
+                  className="sp-card flex min-h-[132px] w-full min-w-0 items-start gap-4 p-5 text-left no-underline"
                 >
-                  <span className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-md ${category.bg} ${category.color}`}>
+                  <span aria-hidden="true" className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-md ${category.bg} ${category.color}`}>
                     {category.icon}
                   </span>
                   <span className="min-w-0">
-                    <span className="sp-subtitle block text-[15px] text-sp-black">{category.label}</span>
+                    <span className="sp-subtitle block text-[15px] text-sp-black [overflow-wrap:anywhere]">{category.label}</span>
                     <span className="mt-2 block text-[12px] text-sp-black/62">
-                      {category.count} documentos disponíveis
+                      {category.count} {category.count === 1 ? "documento disponível" : "documentos disponíveis"}
                     </span>
                   </span>
-                  <FiArrowRight className="ml-auto mt-1 text-sp-red" aria-hidden="true" />
-                </button>
+                  <FiArrowRight className="ml-auto mt-1 shrink-0 text-sp-red" aria-hidden="true" />
+                </Link>
               ))}
             </div>
           </div>
@@ -183,7 +197,7 @@ export default function HomePage() {
               eyebrow="Temas em alta"
               title="Sustentabilidade e ODS"
               action="Ver tema no acervo"
-              onAction={() => handleSearch("Sustentabilidade e ODS")}
+              href={ODS_HREF}
             />
             <p className="mt-3 max-w-[760px] text-[13px] leading-relaxed text-sp-black/66">
               Artigos indicados para apoiar compras públicas sustentáveis,
@@ -224,12 +238,12 @@ function SectionHeading({
   eyebrow,
   title,
   action,
-  onAction,
+  href,
 }: {
   eyebrow: string;
   title: string;
   action: string;
-  onAction: () => void;
+  href: string;
 }) {
   return (
     <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
@@ -239,10 +253,10 @@ function SectionHeading({
           {title}
         </h2>
       </div>
-      <button type="button" onClick={onAction} className="sp-button-secondary h-11 px-5 text-[13px]">
+      <Link href={href} className="sp-button-secondary min-h-11 shrink-0 px-5 py-2 text-[13px] no-underline">
         {action}
         <FiArrowRight aria-hidden="true" />
-      </button>
+      </Link>
     </div>
   );
 }

@@ -8,7 +8,7 @@ import { Breadcrumb } from "@/components/breadcrumb";
 import { ClassificationTrail } from "@/components/classification-trail";
 import { MethodologySubjects } from "@/components/methodology-subjects";
 import { MethodologyNavigation } from "@/components/methodology-navigation";
-import { CLASSIFICATION_EXAMPLES, CLASSIFICATION_FIELDS } from "@/lib/metodologia";
+import { CLASSIFICATION_EXAMPLES, CLASSIFICATION_FIELDS, METHODOLOGY_COLLECTIONS } from "@/lib/metodologia";
 import "./metodologia.css";
 
 export const metadata: Metadata = {
@@ -36,13 +36,26 @@ export default function MetodologiaPage() {
           <ClassificationTrail />
 
           <div className="method-more">
-            <details id="hierarquia"><summary><span><strong>A relação entre os campos</strong><span>Coleções, hierarquia e natureza do objeto</span></span><FiChevronDown aria-hidden="true" /></summary><div className="method-more-body">
+            <details id="colecoes" open>
+              <summary><span><strong>Coleções e tipos de informação</strong><span>O tipo de informação determina a coleção do material</span></span><FiChevronDown aria-hidden="true" /></summary>
+              <div className="method-more-body">
+                <dl className="method-collection-types">
+                  {METHODOLOGY_COLLECTIONS.map((collection) => (
+                    <div key={collection.name}>
+                      <dt>{collection.name}</dt>
+                      <dd>{collection.types.join(", ")}.</dd>
+                    </div>
+                  ))}
+                </dl>
+                <p className="method-collection-note"><strong>Enunciados em Doutrina e Conteúdo Técnico.</strong> Nesta taxonomia, os enunciados de especialistas são conteúdos de interpretação e orientação, não documentos normativos ou decisões de Jurisprudência.</p>
+              </div>
+            </details>
+            <details id="hierarquia"><summary><span><strong>A relação entre os campos</strong><span>Categoria, desdobramentos e natureza do objeto</span></span><FiChevronDown aria-hidden="true" /></summary><div className="method-more-body">
               <p>A hierarquia está em <strong>Categoria → Subcategoria → Microcategoria</strong>. Cada desdobramento pertence ao nível anterior. Coleção, assunto e natureza acrescentam informações complementares.</p>
-              <ol className="method-tree" aria-label="Exemplo de hierarquia"><li><span>Categoria</span><strong>Seleção do Fornecedor</strong></li><li><span>Subcategoria</span><strong>Licitação</strong></li><li><span>Microcategoria</span><strong>Pregão</strong></li></ol>
-              <h3>Coleção: definida pelo tipo de informação</h3><dl className="method-collections"><div><dt>Jurisprudência</dt><dd>Boletins e documentos normativos.</dd></div><div><dt>Trabalhos Acadêmicos</dt><dd>Dissertações, monografias, TCCs e teses.</dd></div><div><dt>Doutrina e Conteúdo Técnico</dt><dd>Artigos, livros digitais, notas técnicas, relatórios, resumos, resumos expandidos e textos de discussão.</dd></div><div><dt>Instrução e Capacitação</dt><dd>Apostilas, cursos, guias, manuais, slides, tutoriais e vídeos.</dd></div></dl>
-              <h3>Natureza: o objeto da contratação</h3><p>Material, Serviços, Obras e Serviços de Engenharia ou Tecnologia da Informação e Comunicação (TIC). Um estudo sobre sustentabilidade na aquisição de computadores pode ter <strong>Assunto: Sustentabilidade e ODS</strong> e <strong>Natureza: TIC</strong>.</p>
+              <ol className="method-tree" aria-label="Relação entre os níveis"><li><span>Categoria</span><strong>Etapa da contratação</strong></li><li><span>Subcategoria</span><strong>Tópico específico</strong></li><li><span>Microcategoria</span><strong>Modalidade, regime ou hipótese</strong></li></ol>
+              <h3>Natureza: o objeto da contratação</h3><p>Material, Serviços, Obras e Serviços de Engenharia ou Tecnologia da Informação e Comunicação (TIC). A natureza identifica o objeto contratado, enquanto o assunto identifica o tema do conteúdo.</p>
             </div></details>
-            <details id="exemplos"><summary><span><strong>Mais exemplos de classificação</strong><span>Quando todos os campos se aplicam e quando alguns não são necessários</span></span><FiChevronDown aria-hidden="true" /></summary><div className="method-more-body method-examples">
+            <details id="exemplos"><summary><span><strong>Exemplos de classificação</strong><span>Aplicação dos conceitos a materiais ilustrativos</span></span><FiChevronDown aria-hidden="true" /></summary><div className="method-more-body method-examples">
               {CLASSIFICATION_EXAMPLES.map((example, index) => <article className="method-example" key={example.title}><p className="method-section-number">Exemplo 0{index + 1}</p><h3>{example.title}</h3><p>{example.intro}</p><dl>{CLASSIFICATION_FIELDS.map((field, fieldIndex) => <div key={field.id}><dt>{field.name}</dt><dd>{example.values[fieldIndex]}</dd></div>)}</dl><p className="method-example-note">{example.note}</p></article>)}
             </div></details>
           </div>

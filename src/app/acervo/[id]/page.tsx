@@ -10,6 +10,7 @@ import {
   FiFileText,
   FiLayers,
   FiLock,
+  FiShield,
   FiUnlock,
   FiUser,
   FiUsers,
@@ -21,17 +22,17 @@ import { Breadcrumb } from "@/components/breadcrumb";
 import { SAMPLE_DOCS, extractYear } from "@/lib/data";
 
 const COLECAO_ICON: Record<string, React.ReactNode> = {
+  Jurisprudência: <FiShield />,
   "Trabalhos Acadêmicos": <FiLayers />,
-  "Materiais Pedagógicos": <FiFileText />,
-  "Livros Digitais": <FiBookOpen />,
-  Eventos: <FiCalendar />,
+  "Doutrina e Conteúdo Técnico": <FiBookOpen />,
+  "Instrução e Capacitação": <FiFileText />,
 };
 
 const COLECAO_CLASS: Record<string, string> = {
+  Jurisprudência: "border-sp-olive/35 bg-sp-olive/10 text-sp-blue-petrol",
   "Trabalhos Acadêmicos": "border-sp-blue/25 bg-sp-blue/10 text-sp-blue",
-  "Materiais Pedagógicos": "border-sp-green/25 bg-sp-green/10 text-sp-green",
-  "Livros Digitais": "border-sp-red/25 bg-gov-red-100 text-sp-red",
-  Eventos: "border-sp-olive/35 bg-sp-olive/10 text-sp-blue-petrol",
+  "Doutrina e Conteúdo Técnico": "border-sp-red/25 bg-gov-red-100 text-sp-red",
+  "Instrução e Capacitação": "border-sp-green/25 bg-sp-green/10 text-sp-green",
 };
 
 export default function DetailPage({ params }: { params: Promise<{ id: string }> }) {
@@ -61,6 +62,7 @@ export default function DetailPage({ params }: { params: Promise<{ id: string }>
   const badgeClass = COLECAO_CLASS[doc.colecao] ?? "border-sp-blue/25 bg-sp-blue/10 text-sp-blue";
   const icon = COLECAO_ICON[doc.colecao] ?? <FiFileText />;
   const ano = extractYear(doc.imprenta);
+  const tipoInfo = doc.detalheTipoInfo ? `${doc.tipoInfo} (${doc.detalheTipoInfo})` : doc.tipoInfo;
 
   return (
     <div className="min-h-screen bg-sp-gray-light text-sp-black">
@@ -79,9 +81,9 @@ export default function DetailPage({ params }: { params: Promise<{ id: string }>
         <section className="border-b border-sp-gray-medium/60 bg-sp-white">
           <div className="sp-container py-9">
             <div className="flex flex-wrap gap-2">
-              <span className={`inline-flex min-h-8 items-center gap-2 rounded-md border px-3 text-[11px] sp-subtitle ${badgeClass}`}>
-                {icon}
-                {doc.tipoInfo || doc.colecao}
+              <span className={`inline-flex min-h-8 max-w-full items-center gap-2 rounded-md border px-3 py-1 text-[11px] sp-subtitle ${badgeClass}`}>
+                <span className="shrink-0" aria-hidden="true">{icon}</span>
+                <span className="min-w-0 [overflow-wrap:anywhere]">{doc.colecao}</span>
               </span>
               <span className="inline-flex min-h-8 items-center rounded-md border border-sp-gray-medium bg-sp-white px-3 text-[11px] text-sp-black/70 sp-subtitle">
                 Complexidade: {doc.complexidade}
@@ -98,19 +100,19 @@ export default function DetailPage({ params }: { params: Promise<{ id: string }>
               </span>
             </div>
 
-            <h1 className="sp-title mt-5 max-w-[940px] text-[34px] leading-tight text-sp-black md:text-[46px]">
+            <h1 className="sp-title mt-5 max-w-[940px] text-[34px] leading-tight text-sp-black [overflow-wrap:anywhere] md:text-[46px]">
               {doc.title}
             </h1>
 
             <div className="mt-5 flex flex-wrap gap-4 text-[13px] text-sp-black/66">
-              <span className="flex items-center gap-2">
-                <FiUser className="text-sp-blue" aria-hidden="true" />
-                {doc.autorPrincipal}
+              <span className="flex min-w-0 items-center gap-2">
+                <FiUser className="shrink-0 text-sp-blue" aria-hidden="true" />
+                <span className="min-w-0 [overflow-wrap:anywhere]">{doc.autorPrincipal}</span>
               </span>
               {doc.autoridade && (
-                <span className="flex items-center gap-2">
-                  <FiUsers className="text-sp-blue" aria-hidden="true" />
-                  {doc.autoridade}
+                <span className="flex min-w-0 items-center gap-2">
+                  <FiUsers className="shrink-0 text-sp-blue" aria-hidden="true" />
+                  <span className="min-w-0 [overflow-wrap:anywhere]">{doc.autoridade}</span>
                 </span>
               )}
               <span className="flex items-center gap-2">
@@ -121,8 +123,8 @@ export default function DetailPage({ params }: { params: Promise<{ id: string }>
           </div>
         </section>
 
-        <section className="sp-container grid gap-6 py-8 lg:grid-cols-[1fr_300px] lg:items-start">
-          <div className="space-y-5">
+        <section className="sp-container grid gap-6 py-8 lg:grid-cols-[minmax(0,1fr)_300px] lg:items-start">
+          <div className="min-w-0 space-y-5 [overflow-wrap:anywhere]">
             <article className="sp-panel p-6 md:p-8">
               <SectionTitle>Resumo</SectionTitle>
               <p className="mt-3 text-[15px] leading-relaxed text-sp-black/76">{doc.resumo}</p>
@@ -140,7 +142,7 @@ export default function DetailPage({ params }: { params: Promise<{ id: string }>
                 {doc.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="rounded-md border border-sp-gray-medium bg-sp-white px-3 py-1.5 text-[11px] text-sp-black/70"
+                    className="max-w-full rounded-md border border-sp-gray-medium bg-sp-white px-3 py-1.5 text-[11px] text-sp-black/70 [overflow-wrap:anywhere]"
                   >
                     {tag}
                   </span>
@@ -150,21 +152,15 @@ export default function DetailPage({ params }: { params: Promise<{ id: string }>
 
             <section className="sp-panel p-6 md:p-8">
               <SectionTitle>Classificação BDLP</SectionTitle>
-              <div className="mt-5 grid gap-4 md:grid-cols-2">
-                {(
-                  [
-                    ["Assunto", doc.assunto],
-                    ["Categoria", doc.categoria],
-                    doc.subcategoria ? ["Subcategoria", doc.subcategoria] : null,
-                    ["Coleção", doc.colecao],
-                    ["Tipo de Informação", doc.tipoInfo],
-                  ] as (string[] | null)[]
-                )
-                  .filter(Boolean)
-                  .map((item) => (
-                    <MetaItem key={item![0]} label={item![0]} value={item![1]} />
-                  ))}
-              </div>
+              <dl className="mt-5 grid gap-4 md:grid-cols-2">
+                <MetaItem label="Coleção" value={doc.colecao} />
+                <MetaItem label="Tipo de Informação" value={tipoInfo} />
+                <MetaItem label="Categoria" value={doc.categoria} />
+                <MetaItem label="Subcategoria" value={doc.subcategoria} />
+                <MetaItem label="Microcategoria" value={doc.microcategoria} />
+                <MetaItem label="Assunto" value={doc.assunto} />
+                <MetaItem label="Natureza" value={doc.natureza} />
+              </dl>
             </section>
 
             {downloaded && (
@@ -174,7 +170,7 @@ export default function DetailPage({ params }: { params: Promise<{ id: string }>
             )}
           </div>
 
-          <aside className="space-y-4">
+          <aside className="min-w-0 space-y-4">
             <div className="sp-panel p-5">
               <a
                 href={doc.url}
@@ -204,26 +200,14 @@ export default function DetailPage({ params }: { params: Promise<{ id: string }>
 
             <div className="sp-panel p-5">
               <SectionTitle>Referência</SectionTitle>
-              <div className="mt-4 space-y-3">
-                {(
-                  [
-                    doc.imprenta && ["Imprenta", doc.imprenta],
-                    doc.doi && ["DOI", doc.doi],
-                    doc.issn && ["ISSN", doc.issn],
-                    doc.isbn && ["ISBN", doc.isbn],
-                    doc.descFisica && ["Descrição", doc.descFisica],
-                    ["Acesso", doc.acesso],
-                  ] as (string[] | false)[]
-                )
-                  .filter(Boolean)
-                  .map((item) => (
-                    <MetaItem
-                      key={(item as string[])[0]}
-                      label={(item as string[])[0]}
-                      value={(item as string[])[1]}
-                    />
-                  ))}
-              </div>
+              <dl className="mt-4 space-y-3">
+                <MetaItem label="Imprenta" value={doc.imprenta} />
+                <MetaItem label="DOI" value={doc.doi} />
+                <MetaItem label="ISSN" value={doc.issn} />
+                <MetaItem label="ISBN" value={doc.isbn} />
+                <MetaItem label="Descrição" value={doc.descFisica} />
+                <MetaItem label="Acesso" value={doc.acesso} />
+              </dl>
             </div>
           </aside>
         </section>
@@ -238,11 +222,13 @@ function SectionTitle({ children }: { children: React.ReactNode }) {
   return <h2 className="sp-subtitle text-[13px] uppercase text-sp-red">{children}</h2>;
 }
 
-function MetaItem({ label, value }: { label: string; value: string }) {
+function MetaItem({ label, value }: { label: string; value?: string }) {
+  if (!value?.trim()) return null;
+
   return (
-    <div className="border-b border-sp-gray-medium/60 pb-3 last:border-b-0 last:pb-0">
-      <div className="mb-1 text-[11px] text-sp-black/45">{label}</div>
-      <div className="break-words text-[13px] leading-relaxed text-sp-black/78">{value}</div>
+    <div className="min-w-0 border-b border-sp-gray-medium/60 pb-3 last:border-b-0 last:pb-0">
+      <dt className="mb-1 text-[11px] text-sp-black/45">{label}</dt>
+      <dd className="text-[13px] leading-relaxed text-sp-black/78 [overflow-wrap:anywhere]">{value}</dd>
     </div>
   );
 }

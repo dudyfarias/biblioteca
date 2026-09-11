@@ -5,7 +5,7 @@ import Link from "next/link";
 import { FiArrowRight } from "react-icons/fi";
 
 const sections = [
-  { id: "trilha", label: "Exemplo interativo" },
+  { id: "trilha", label: "Conceitos e coleções" },
   { id: "assuntos", label: "Os 14 assuntos" },
   { id: "duvidas", label: "Perguntas frequentes" },
 ];
