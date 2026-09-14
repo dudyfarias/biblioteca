@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { FiChevronDown } from "react-icons/fi";
 import { MethodologyPage } from "@/components/methodology-page";
 import { MethodologySubjects } from "@/components/methodology-subjects";
@@ -12,8 +13,9 @@ export default function MethodologySubjectsPage() {
   return (
     <MethodologyPage
       title="Assuntos"
-      description="Conheça os temas do acervo e os critérios que orientam a classificação de cada material."
+      description="Assunto é a dimensão temática da classificação. Na pesquisa, funciona como um filtro opcional para facilitar a consulta."
       activePath="/metodologia/assuntos"
+      introduction={<p className="method-rule">Você pode <Link href="/acervo">buscar no acervo por qualquer palavra</Link>, sem selecionar um assunto ou outros filtros.</p>}
     >
       <section id="assuntos" className="method-section" aria-labelledby="assuntos-title">
         <div className="method-section-heading">

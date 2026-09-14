@@ -6,16 +6,21 @@ import { CLASSIFICATION_EXAMPLES, CLASSIFICATION_FIELDS, METHODOLOGY_COLLECTIONS
 
 export const metadata: Metadata = {
   title: "Conceitos e coleções | Metodologia | Biblioteca Digital de Logística Pública",
-  description: "Entenda os seis campos da classificação, as coleções e os tipos de informação da Biblioteca Digital de Logística Pública.",
+  description: "Entenda a taxonomia multidimensional da biblioteca e como pesquisar por qualquer palavra, com ou sem filtros.",
 };
 
 export default function MetodologiaPage() {
   return (
     <MethodologyPage
       title="Conceitos e coleções"
-      description="Cada material é organizado pela sua forma, pela etapa da contratação e pelo tema que aborda."
+      description="A taxonomia da biblioteca é multidimensional: combina a forma do material, a etapa da contratação, o tema e, se aplicável, o objeto contratado."
       activePath="/metodologia"
-      introduction={<p className="method-rule"><strong>Coleção, categoria e assunto são obrigatórios.</strong> Subcategoria, microcategoria e natureza são preenchidas, se aplicável.</p>}
+      introduction={
+        <>
+          <p className="method-rule"><strong>Na classificação dos documentos, coleção, categoria e assunto são obrigatórios.</strong> Subcategoria, microcategoria e natureza são preenchidas, se aplicável.</p>
+          <p className="method-rule"><strong>Na pesquisa, todos os filtros são opcionais.</strong> Assunto é um filtro temático para facilitar a consulta. Você pode buscar no acervo por qualquer palavra, sem selecionar filtros.</p>
+        </>
+      }
     >
           <ClassificationTrail />
 

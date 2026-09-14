@@ -37,6 +37,8 @@ Natureza mantém os quatro valores já usados na metodologia: Material, Serviço
 
 A trilha inicia a explicação dos seis campos. Azul institucional indica obrigatório; azul-claro indica se aplicável. Os requisitos também estão escritos. Somente categoria, subcategoria e microcategoria estão conectadas por setas de hierarquia. Os demais campos se somam à classificação.
 
+A introdução explicita que a taxonomia é multidimensional e distingue classificação de pesquisa: os campos obrigatórios pertencem à catalogação dos documentos. Na consulta, todos os filtros são opcionais; Assunto é um filtro temático, e a busca aceita qualquer palavra sem exigir a seleção de filtros. Esse esclarecimento também aparece na página de Assuntos e nas perguntas frequentes.
+
 A interface prioriza o desktop. A trilha usa nós compactos e um painel de resumo no fluxo da página, atualizado por mouse, teclado ou clique. A navegação por teclado tem prioridade sobre o hover. No celular, cada item revela a explicação logo abaixo; um segundo toque a recolhe. A animação respeita a preferência de movimento reduzido.
 
 O agrupamento superior diferencia formato, etapa da contratação com seus desdobramentos, tema e objeto. Setas esquerda/direita e Home/End permitem percorrer os campos no desktop. O anúncio automático de acessibilidade informa apenas o campo selecionado, sem repetir o painel inteiro. Chevrons indicam a expansão, e estados de foco, seleção e obrigatoriedade não dependem apenas de cores. O menu da metodologia identifica a página atual e não muda com a rolagem.

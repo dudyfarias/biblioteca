@@ -21,8 +21,8 @@ export default function MethodologyQuestionsPage() {
         </div>
         <div className="method-faq">
           <details>
-            <summary>Preciso preencher todos os filtros para pesquisar?<FiChevronDown aria-hidden="true" /></summary>
-            <p>Não. A obrigatoriedade se refere à classificação dos documentos na biblioteca. Na consulta, você pode começar com uma palavra ou combinar os filtros úteis à sua pesquisa.</p>
+            <summary>Posso pesquisar sem usar os filtros?<FiChevronDown aria-hidden="true" /></summary>
+            <p>Sim. Você pode buscar no acervo por qualquer palavra, sem selecionar filtros. Assunto é apenas um filtro temático para facilitar a consulta, não uma lista que limita as palavras da busca. A taxonomia é multidimensional: combina diferentes dimensões para organizar os documentos. Os campos obrigatórios dizem respeito à classificação, não à pesquisa.</p>
           </details>
           <details>
             <summary>O que significa “se aplicável”?<FiChevronDown aria-hidden="true" /></summary>
