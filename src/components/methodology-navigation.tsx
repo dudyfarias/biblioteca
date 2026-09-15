@@ -4,7 +4,6 @@ import { FiArrowRight } from "react-icons/fi";
 const pages = [
   { href: "/metodologia", label: "Conceitos e coleções" },
   { href: "/metodologia/assuntos", label: "Assuntos" },
-  { href: "/metodologia/perguntas-frequentes", label: "Perguntas frequentes" },
 ];
 
 export function MethodologyNavigation({ activePath }: { activePath: string }) {

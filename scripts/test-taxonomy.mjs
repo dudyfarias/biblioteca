@@ -38,7 +38,7 @@ test("collections and 25 information types match the current workbook", () => {
   assert.equal(data.TIPOS_INFORMACAO_POR_COLECAO, data.COLECOES);
 });
 
-test("all 14 subjects match the current workbook", () => {
+test("all 16 subjects match the final workbook", () => {
   assert.deepEqual(data.ASSUNTOS, [
     "Aspectos Jurídicos e Regulatórios", "Governança", "Inovação e Tecnologia",
     "Sustentabilidade e ODS", "Controle, Auditoria e Combate à Corrupção",
@@ -46,9 +46,24 @@ test("all 14 subjects match the current workbook", () => {
     "Compras Centralizadas/compartilhadas", "Transparência", "Integridade",
     "Micro e Pequenas Empresas", "Uso de Sistemas", "Sanções Administrativas",
     "Catálogo eletrônico de Padronização",
+    "Gestão Estratégica e Desempenho das Contratações", "Logística Pública Internacional",
   ]);
-  assert.equal(methodology.CLASSIFICATION_FIELDS.filter((field) => field.required).length, 3);
+});
+
+test("the classification preserves field order and required dimensions", () => {
+  assert.deepEqual(methodology.CLASSIFICATION_FIELDS.map(({ name, required }) => [name, required]), [
+    ["Coleção", true], ["Categoria", true], ["Subcategoria", false],
+    ["Microcategoria", false], ["Assunto", true], ["Natureza", false],
+  ]);
   assert.ok(methodology.CLASSIFICATION_FIELDS.every((field) => field.summary && field.question));
+});
+
+test("new subject filters combine without reclassifying existing records", () => {
+  const subjects = data.ASSUNTOS.slice(-2);
+  const fixtures = subjects.map((assunto, index) => ({ ...data.SAMPLE_DOCS[index], assunto }));
+  assert.deepEqual(ids(data.filterDocuments(fixtures, { assunto: subjects })), [1, 2]);
+  assert.deepEqual(ids(data.filterDocuments(fixtures, { assunto: subjects[1] })), [2]);
+  assert.deepEqual(ids(data.filterDocuments(data.SAMPLE_DOCS, { assunto: subjects })), []);
 });
 
 test("auxiliary procedures are separate, with price registration as a subcategory", () => {

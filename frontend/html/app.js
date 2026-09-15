@@ -65,7 +65,9 @@
     "Micro e Pequenas Empresas",
     "Uso de Sistemas",
     "Sanções Administrativas",
-    "Catálogo eletrônico de Padronização"
+    "Catálogo eletrônico de Padronização",
+    "Gestão Estratégica e Desempenho das Contratações",
+    "Logística Pública Internacional"
   ];
 
   const categoryTree = {

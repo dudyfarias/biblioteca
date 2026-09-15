@@ -18,7 +18,7 @@ export const METHODOLOGY_COLLECTIONS = [
   },
 ] as const satisfies readonly { name: string; types: readonly string[] }[];
 
-// Assuntos transcritos de Caracterizacao_Assuntos_Taxonomia_BDLP (1).xlsx, Assuntos!A2:C15.
+// Assuntos transcritos de Caracterizacao_Assuntos_Taxonomia_BDLP (2).xlsx, Assuntos!A2:C17.
 export const METHODOLOGY_SUBJECTS = [
   {
     name: "Aspectos Jurídicos e Regulatórios",
@@ -103,6 +103,18 @@ export const METHODOLOGY_SUBJECTS = [
     summary: "Instrumento de padronização de itens de compra.",
     description: "Trata do catálogo eletrônico de padronização de materiais e serviços, instrumento previsto na Lei nº 14.133/2021 para uniformizar especificações.",
     focus: "A padronização das especificações de materiais e serviços.",
+  },
+  {
+    name: "Gestão Estratégica e Desempenho das Contratações",
+    summary: "Operação e resultados.",
+    description: "Trata da operação e resultados dos processos: prazos, economicidade, produtividade, indicadores, qualidade.",
+    focus: "A operação e os resultados dos processos de contratação.",
+  },
+  {
+    name: "Logística Pública Internacional",
+    summary: "Compras Internacionais e Cooperação.",
+    description: "Marcos, comparações e cooperação internacional em contratações públicas.",
+    focus: "Os marcos, as comparações e a cooperação internacional em contratações públicas.",
   },
 ] as const;
 

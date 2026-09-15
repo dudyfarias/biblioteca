@@ -1,8 +1,9 @@
 "use client";
 
 import { useEffect, useId, useRef, useState } from "react";
-import { FiPlus, FiSearch, FiX } from "react-icons/fi";
+import { FiPlus, FiSearch, FiX, FiTag } from "react-icons/fi";
 import { METHODOLOGY_SUBJECTS } from "@/lib/metodologia";
+import { SUBJECT_ICONS } from "@/components/methodology-icons";
 
 function normalizeSearch(value: string) {
   return value.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLocaleLowerCase("pt-BR").trim();
@@ -78,10 +79,13 @@ export function MethodologySubjects() {
       </div>
 
       <div id={resultsId} className="method-subjects">
-        {visibleSubjects.map(({ subject, index }) => (
+        {visibleSubjects.map(({ subject, index }) => {
+          const Icon = SUBJECT_ICONS[subject.name] ?? FiTag;
+          return (
           <details className="method-subject" key={subject.name}>
             <summary ref={index === 6 ? firstRevealedRef : undefined}>
               <span className="method-subject-number" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
+              <Icon className="method-subject-icon" aria-hidden="true" />
               <span className="method-subject-heading">
                 <strong className="method-subject-name">{subject.name}</strong>
                 <span className="method-subject-summary">{subject.summary}</span>
@@ -93,7 +97,7 @@ export function MethodologySubjects() {
               <p><strong>Foco da classificação:</strong> {subject.focus}</p>
             </div>
           </details>
-        ))}
+        ); })}
         {subjects.length === 0 && (
           <div className="method-subject-empty">
             <p>Nenhum assunto encontrado.</p>

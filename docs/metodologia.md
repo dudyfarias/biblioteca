@@ -1,19 +1,20 @@
 # Metodologia de classificação
 
-A metodologia está organizada em três páginas independentes. O menu mantém o visual institucional, mas cada item abre uma URL própria em vez de rolar para uma seção.
+A metodologia está organizada em duas páginas independentes. O menu mantém o visual institucional, mas cada item abre uma URL própria em vez de rolar para uma seção.
 
 | Página | Endereço | Conteúdo |
 | --- | --- | --- |
 | Conceitos e coleções | `/metodologia` | Seis campos, coleções e tipos, hierarquia e exemplos. |
 | Assuntos | `/metodologia/assuntos` | Busca de assuntos, definições e comparação de temas próximos. |
-| Perguntas frequentes | `/metodologia/perguntas-frequentes` | Dúvidas sobre classificação e consulta ao acervo. |
+
+Perguntas frequentes foi retirada. A URL antiga `/metodologia/perguntas-frequentes` redireciona permanentemente para `/metodologia`, preservando links já compartilhados.
 
 Cada página tem título, descrição e breadcrumb próprios. Apenas seu conteúdo é renderizado; não são painéis ocultos de uma página única. O item ativo usa `aria-current="page"`, com o mesmo sublinhado vermelho do menu anterior. URLs diretas, recarregamento e histórico do navegador funcionam pela navegação normal do Next.js.
 
 ## Referências
 
 - `CLASSIFICAÇÃO GERAL BIBLIOTECA.xlsx`, aba `Planilha1`, A2:B7: perguntas dos seis campos; A11:B14: quatro coleções e 25 tipos de informação.
-- `Caracterizacao_Assuntos_Taxonomia_BDLP (1).xlsx`, aba `Assuntos`, A2:C15: nomes e definições dos 14 assuntos. A linha de total não é um assunto. A anotação "1 registro" não representa uma contagem deste acervo.
+- `Caracterizacao_Assuntos_Taxonomia_BDLP (2).xlsx`, aba `Assuntos`, A2:C17: nomes e definições dos 16 assuntos. Inclui Gestão Estratégica e Desempenho das Contratações e Logística Pública Internacional. A linha de total não é um assunto. A anotação "1 registro" não representa uma contagem deste acervo.
 - Confirmação em 11/09/2026: aplicar as novas planilhas à metodologia e ao acervo. Essas fontes prevalecem sobre as listas anteriores do documento de pedidos e do protótipo.
 - Orientação explícita do usuário em 10/09/2026: coleção, categoria e assunto obrigatórios; subcategoria, microcategoria e natureza se aplicável.
 - Exemplo enviado pelo usuário: artigo sobre Registro de Preços para aquisição de cadeiras de escritório, agora ajustado à separação de Procedimentos Auxiliares. Natureza continua Material.
@@ -35,15 +36,15 @@ A célula B3 da classificação geral destaca os procedimentos auxiliares em sep
 
 Natureza mantém os quatro valores já usados na metodologia: Material, Serviços, Obras e Serviços de Engenharia e TIC. A nova planilha confirma a pergunta do campo, mas não enumera seus valores. Natureza identifica o objeto contratado, não qualquer menção ao tema correspondente.
 
-A trilha inicia a explicação dos seis campos. Azul institucional indica obrigatório; azul-claro indica se aplicável. Os requisitos também estão escritos. Somente categoria, subcategoria e microcategoria estão conectadas por setas de hierarquia. Os demais campos se somam à classificação.
+A trilha explica os seis campos com ícones de biblioteca e fundos suaves derivados da paleta institucional. A cor do cartão distingue a dimensão, não sua obrigatoriedade: os requisitos estão escritos em badges, com borda tracejada para campos condicionais. A faixa inicial e a legenda preservam azul institucional para obrigatório e azul-claro para se aplicável. Somente categoria, subcategoria e microcategoria estão conectadas por setas de hierarquia. Os demais campos se somam à classificação.
 
-A introdução explicita que a taxonomia é multidimensional e distingue classificação de pesquisa: os campos obrigatórios pertencem à catalogação dos documentos. Na consulta, todos os filtros são opcionais; Assunto é um filtro temático, e a busca aceita qualquer palavra sem exigir a seleção de filtros. Esse esclarecimento também aparece na página de Assuntos e nas perguntas frequentes.
+A introdução apresenta primeiro a composição da classificação: Coleção (obrigatório) + Categoria (obrigatório) + Subcategoria (se aplicável) + Microcategoria (se aplicável) + Assunto (obrigatório) + Natureza (se aplicável). Os seis campos ficam na mesma linha no desktop e se reorganizam em telas menores, com o status escrito em cada um. Em seguida, explicita que a taxonomia é multidimensional e distingue classificação de pesquisa: os campos obrigatórios pertencem à catalogação dos documentos. Na consulta, todos os filtros são opcionais; Assunto é um filtro temático, e a busca aceita qualquer palavra sem exigir a seleção de filtros. Esse esclarecimento também aparece na página de Assuntos e nas perguntas frequentes, em acordo com a observação em Assuntos!A24 da planilha final.
 
 A interface prioriza o desktop. A trilha usa nós compactos e um painel de resumo no fluxo da página, atualizado por mouse, teclado ou clique. A navegação por teclado tem prioridade sobre o hover. No celular, cada item revela a explicação logo abaixo; um segundo toque a recolhe. A animação respeita a preferência de movimento reduzido.
 
-O agrupamento superior diferencia formato, etapa da contratação com seus desdobramentos, tema e objeto. Setas esquerda/direita e Home/End permitem percorrer os campos no desktop. O anúncio automático de acessibilidade informa apenas o campo selecionado, sem repetir o painel inteiro. Chevrons indicam a expansão, e estados de foco, seleção e obrigatoriedade não dependem apenas de cores. O menu da metodologia identifica a página atual e não muda com a rolagem.
+Os ícones, os rótulos e as explicações curtas diferenciam formato, etapa da contratação com seus desdobramentos, tema e objeto. Setas esquerda/direita e Home/End permitem percorrer os campos no desktop. O anúncio automático de acessibilidade informa apenas o campo selecionado, sem repetir o painel inteiro. Chevrons indicam a expansão, e estados de foco, seleção e obrigatoriedade não dependem apenas de cores. O menu da metodologia identifica a página atual e não muda com a rolagem.
 
-Na página de conceitos, a ordem de leitura é conceito, coleções e tipos, hierarquia e exemplos. A trilha usa resumos conceituais; não antecipa a ficha do artigo. A tabela de coleções inicia aberta, enquanto hierarquia e exemplos podem ser expandidos. Não foi recriada a seção textual que duplicava a trilha. Na página de assuntos, a consulta mostra seis itens inicialmente e permite expandir os 14. A busca ignora diferenças de caixa e acentos e pesquisa todas as definições.
+Na página de conceitos, a ordem de leitura é estrutura da classificação, conceitos, exemplo prático, coleções e tipos, hierarquia e exemplos complementares. A trilha usa resumos conceituais; em seguida, uma faixa apresenta a classificação do artigo sobre Registro de Preços para cadeiras de escritório. As quatro coleções ficam visíveis em cartões com links para o acervo filtrado. Enunciados permanece uma nota dentro de Doutrina e Conteúdo Técnico, nunca uma quinta coleção. Hierarquia e exemplos complementares podem ser expandidos. Na página de assuntos, a grade tem três colunas no desktop e uma no celular; mostra seis itens inicialmente e permite expandir os 16. A busca ignora diferenças de caixa e acentos e pesquisa todas as definições.
 
 ## Integração
 

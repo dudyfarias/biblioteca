@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
-import { FiChevronDown } from "react-icons/fi";
+import Link from "next/link";
+import { FiChevronDown, FiArrowRight, FiBookOpen, FiFileText } from "react-icons/fi";
 import { ClassificationTrail } from "@/components/classification-trail";
 import { MethodologyPage } from "@/components/methodology-page";
+import { COLLECTION_ICONS } from "@/components/methodology-icons";
 import { CLASSIFICATION_EXAMPLES, CLASSIFICATION_FIELDS, METHODOLOGY_COLLECTIONS } from "@/lib/metodologia";
 
 export const metadata: Metadata = {
@@ -12,33 +14,50 @@ export const metadata: Metadata = {
 export default function MetodologiaPage() {
   return (
     <MethodologyPage
-      title="Conceitos e coleções"
-      description="A taxonomia da biblioteca é multidimensional: combina a forma do material, a etapa da contratação, o tema e, se aplicável, o objeto contratado."
+      title="Estrutura da classificação"
+      description="A classificação de cada documento combina estes campos:"
       activePath="/metodologia"
       introduction={
         <>
-          <p className="method-rule"><strong>Na classificação dos documentos, coleção, categoria e assunto são obrigatórios.</strong> Subcategoria, microcategoria e natureza são preenchidas, se aplicável.</p>
+          <ol className="method-structure" aria-label="Estrutura da classificação">
+            {CLASSIFICATION_FIELDS.map((field) => (
+              <li key={field.id} className={field.required ? "is-required" : "is-conditional"}>
+                <strong>{field.name}</strong>
+                <span>{field.required ? "Obrigatório" : "Se aplicável"}</span>
+              </li>
+            ))}
+          </ol>
+          <p className="method-rule"><strong>A taxonomia é multidimensional.</strong> Os campos se complementam: identificam a forma do material, a etapa da contratação, o tema e, se aplicável, o objeto contratado.</p>
           <p className="method-rule"><strong>Na pesquisa, todos os filtros são opcionais.</strong> Assunto é um filtro temático para facilitar a consulta. Você pode buscar no acervo por qualquer palavra, sem selecionar filtros.</p>
         </>
       }
     >
           <ClassificationTrail />
 
+          <section className="method-practical" aria-labelledby="practical-title">
+            <div className="method-practical-heading"><FiFileText aria-hidden="true" /><h2 id="practical-title">Exemplo prático</h2><p>Artigo sobre aspectos normativos do Registro de Preços para aquisição de cadeiras de escritório.</p></div>
+            <dl className="method-practical-fields">
+              {CLASSIFICATION_FIELDS.map((field, index) => <div key={field.id}><dt>{field.name}</dt><dd>{CLASSIFICATION_EXAMPLES[0].values[index]}</dd></div>)}
+            </dl>
+          </section>
+
+          <section id="colecoes" className="method-section method-collections" aria-labelledby="collections-title">
+            <div className="method-section-heading"><div><h2 id="collections-title">Coleções e tipos de informação</h2><p className="method-section-intro">O tipo de informação determina a coleção do material.</p></div></div>
+            <div className="method-collection-grid">
+              {METHODOLOGY_COLLECTIONS.map((collection) => {
+                const Icon = COLLECTION_ICONS[collection.name] ?? FiBookOpen;
+                return <article className="method-collection" key={collection.name} data-collection={collection.name}>
+                  <Icon className="method-collection-icon" aria-hidden="true" />
+                  <h3>{collection.name}</h3>
+                  <p>{collection.types.join(", ")}.</p>
+                  <Link href={`/acervo?${new URLSearchParams({ colecao: collection.name })}`} aria-label={`Consultar coleção: ${collection.name}`}>Consultar coleção <FiArrowRight aria-hidden="true" /></Link>
+                </article>;
+              })}
+            </div>
+            <p className="method-collection-note"><FiFileText aria-hidden="true" /><span><strong>Enunciados fazem parte de Doutrina e Conteúdo Técnico.</strong> Nesta taxonomia, os enunciados de especialistas são conteúdos de interpretação e orientação, não documentos normativos ou decisões de Jurisprudência.</span></p>
+          </section>
+
           <div className="method-more">
-            <details id="colecoes" open>
-              <summary><span><strong>Coleções e tipos de informação</strong><span>O tipo de informação determina a coleção do material</span></span><FiChevronDown aria-hidden="true" /></summary>
-              <div className="method-more-body">
-                <dl className="method-collection-types">
-                  {METHODOLOGY_COLLECTIONS.map((collection) => (
-                    <div key={collection.name}>
-                      <dt>{collection.name}</dt>
-                      <dd>{collection.types.join(", ")}.</dd>
-                    </div>
-                  ))}
-                </dl>
-                <p className="method-collection-note"><strong>Enunciados em Doutrina e Conteúdo Técnico.</strong> Nesta taxonomia, os enunciados de especialistas são conteúdos de interpretação e orientação, não documentos normativos ou decisões de Jurisprudência.</p>
-              </div>
-            </details>
             <details id="hierarquia"><summary><span><strong>A relação entre os campos</strong><span>Categoria, desdobramentos e natureza do objeto</span></span><FiChevronDown aria-hidden="true" /></summary><div className="method-more-body">
               <p>A hierarquia está em <strong>Categoria → Subcategoria → Microcategoria</strong>. Cada desdobramento pertence ao nível anterior. Coleção, assunto e natureza acrescentam informações complementares.</p>
               <ol className="method-tree" aria-label="Relação entre os níveis"><li><span>Categoria</span><strong>Etapa da contratação</strong></li><li><span>Subcategoria</span><strong>Tópico específico</strong></li><li><span>Microcategoria</span><strong>Modalidade, regime ou hipótese</strong></li></ol>
